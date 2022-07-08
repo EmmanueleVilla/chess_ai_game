@@ -27,3 +27,5 @@ python3 main.py "python3 AI/stupid_ai.py" "python3 AI/stupid_ai.py"
 The output will be the board:
 
 ![Board](/images/preview.png "The board")
+
+The AI executable will receive the state of the board and must print to the console the move. The communication interface is yet to be determined
