@@ -1,12 +1,8 @@
-from colors import COLOR_BLUE
 from coord import Coord
 
 
 class Piece:
     """Represents a piece on the board"""
-    color = COLOR_BLUE
-    name = ""
-    coord = Coord(0, 0)
 
     def i(self):
         """Returns the i coordinate"""
