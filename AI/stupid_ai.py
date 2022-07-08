@@ -1,5 +1,9 @@
+import sys
+
+
 def main():
+    """Main method"""
     print("6:0-5:0")
 
 main()
-exit(0)
+sys.exit()
