@@ -1,6 +1,3 @@
-from coord import Coord
-
-
 class Move:
     """Represents a move on the board"""
 
