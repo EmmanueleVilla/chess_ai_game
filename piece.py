@@ -16,3 +16,6 @@ class Piece:
         self.color = color
         self.name = name
         self.coord = Coord(i, j)
+
+    def __eq__(self, obj):
+        return isinstance(obj, Piece) and obj.coord == self.coord and obj.color == self.color and obj.name == self.name

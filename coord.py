@@ -3,3 +3,6 @@ class Coord:
     def __init__(self, i, j):
         self.i = i
         self.j = j
+
+    def __eq__(self, obj):
+        return isinstance(obj, Coord) and obj.i == self.i and obj.j == self.j
