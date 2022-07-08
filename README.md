@@ -28,4 +28,6 @@ The output will be the board:
 
 ![Board](/images/preview.png "The board")
 
-The AI executable will receive the state of the board via args and must print to the console the move. The communication interface is yet to be determined
+The AI executable will receive the state of the board via args, must print to the console the move and then exit(0). The communication interface is yet to be determined.
+
+During play, a log file with all the moves will be saved for training.
