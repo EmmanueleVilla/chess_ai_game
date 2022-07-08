@@ -32,8 +32,8 @@ def play(board_size, args):
     print_board(pieces)
 
 def print_board(pieces):
-    board_size = 8
     """Prints the board"""
+    board_size = 8
     for i in range(board_size):
         for j in range(board_size):
             piece = search_by_indexes(pieces, i,j)
