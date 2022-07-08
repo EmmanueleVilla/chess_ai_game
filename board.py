@@ -40,6 +40,6 @@ PIECES = [
 
 def search_by_indexes(i,j):
     for piece in PIECES:
-        if(piece.i == i) and (piece.j == j):
+        if(piece.i() == i) and (piece.j() == j):
             return piece
     return None
