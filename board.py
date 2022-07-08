@@ -3,7 +3,7 @@ from piece import Piece
 
 BOARD_SIZE = 8
 
-def buildPieces():
+def build_pieces():
     """Builds the starting game pieces"""
     return [
     Piece(COLOR_BLUE, "T", 0, 0),
