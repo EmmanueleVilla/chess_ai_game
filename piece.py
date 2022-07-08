@@ -1,24 +1,22 @@
-from colors import colors
+from colors import Colors
 from coord import Coord
 
 
 class Piece:
-    color = colors.BLUE
-    type = ""
+    """Represents a piece on the board"""
+    color = Colors.BLUE
+    name = ""
     coord = Coord(0, 0)
 
     def i(self):
+        """Returns the i coordinate"""
         return self.coord.i
-    
+
     def j(self):
+        """Returns the j coordinate"""
         return self.coord.j
 
-    def __init__(self, color, type, coord):
+    def __init__(self, color, name, i, j):
         self.color = color
-        self.type = type
-        self.coord = coord
-
-    def __init__(self, color, type, i, j):
-        self.color = color
-        self.type = type
+        self.name = name
         self.coord = Coord(i, j)
