@@ -1,7 +1,7 @@
 import subprocess
 import sys
 
-from board import BOARD_SIZE, buildPieces, search_by_indexes
+from board import BOARD_SIZE, build_pieces, search_by_indexes
 from colors import COLOR_DEFAULT
 
 FIRST_IA = ""
@@ -26,7 +26,7 @@ def play_turn(pieces, cmd):
 
 def play(args):
     """Starts the game"""
-    pieces = buildPieces()
+    pieces = build_pieces()
     print_board(pieces)
     pieces = play_turn(pieces, args[0])
     print_board(pieces)
