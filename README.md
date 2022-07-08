@@ -18,8 +18,12 @@ To play, you'll just need to call
 python3 main.py "command to execute the first AI" "command to execute the second AI"
 ```
 
-for example, to use the default AI:
+For example, to use the default AI:
 
 ```
 python3 main.py "python3 AI/stupid_ai.py" "python3 AI/stupid_ai.py"
 ```
+
+The output will be the board:
+
+![Board](/images/preview.png "The board")
