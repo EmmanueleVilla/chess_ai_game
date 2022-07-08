@@ -1,7 +1,7 @@
 import subprocess
 import sys
 
-from board import BOARD_SIZE, build_pieces, search_by_indexes
+from board import build_pieces, search_by_indexes
 from colors import COLOR_DEFAULT
 
 FIRST_IA = ""
@@ -24,17 +24,18 @@ def play_turn(pieces, cmd):
             print(line)
     return pieces
 
-def play(args):
+def play(board_size, args):
     """Starts the game"""
-    pieces = build_pieces()
+    pieces = build_pieces(board_size)
     print_board(pieces)
     pieces = play_turn(pieces, args[0])
     print_board(pieces)
 
 def print_board(pieces):
+    board_size = 8
     """Prints the board"""
-    for i in range(BOARD_SIZE):
-        for j in range(BOARD_SIZE):
+    for i in range(board_size):
+        for j in range(board_size):
             piece = search_by_indexes(pieces, i,j)
             output = "["
             if piece is not None:
@@ -54,6 +55,6 @@ def main():
     if(args[0] == "-h") or (args[0] == "--help"):
         print_help()
     else:
-        play(args)
+        play(8, args)
 
 main()

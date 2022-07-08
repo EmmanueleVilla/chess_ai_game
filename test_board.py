@@ -4,7 +4,7 @@ from piece import Piece
 
 
 def test_build_pieces():
-    pieces = build_pieces()
+    pieces = build_pieces(8)
     assert pieces[0] == Piece(COLOR_BLUE, "T", 0, 0)
     assert pieces[1] == Piece(COLOR_BLUE, "N", 0, 1)
     assert pieces[2] == Piece(COLOR_BLUE, "B", 0, 2)
