@@ -7,6 +7,7 @@ It's a work in progress and I'm just learning python, so it sucks :)
 ## Description
 
 Chess AI Game is a game where you develop your own artificial intelligence to play chess and attach it to the main executable to play.
+It will also print a log at filesystem so one can analyze it to train a model.
 
 Yes, I know there are already lots of programs like this and official AI tournament and stuff, this is just an exercise
 
