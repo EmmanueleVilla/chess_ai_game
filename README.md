@@ -21,5 +21,5 @@ python3 main.py "command to execute the first AI" "command to execute the second
 for example, to use the default AI:
 
 ```
-python3 main.py "python3 stupid_ia.py" "python3 stupid_ia.py"
+python3 main.py "python3 AI/stupid_ai.py" "python3 AI/stupid_ai.py"
 ```
