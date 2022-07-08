@@ -1,10 +1,10 @@
-from colors import Colors
+from colors import COLOR_BLUE
 from coord import Coord
 
 
 class Piece:
     """Represents a piece on the board"""
-    color = Colors.BLUE
+    color = COLOR_BLUE
     name = ""
     coord = Coord(0, 0)
 

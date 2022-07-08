@@ -1,6 +1,3 @@
-class Colors:
-    """Contains the colors of the pieces"""
-    BLUE = '\033[94m'
-    GREEN = '\033[92m'
-    ENDC = '\033[0m'
-    
+COLOR_BLUE = '\033[94m'
+COLOR_GREEN = '\033[92m'
+COLOR_DEFAULT = '\033[0m'
