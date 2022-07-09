@@ -1,4 +1,3 @@
-from colors import COLOR_BLUE, COLOR_GREEN
 from piece import Piece
 
 def build_pieces(board_size):
@@ -7,13 +6,13 @@ def build_pieces(board_size):
     letters = ["T","N","B","K","Q","B","N","T"]
     output = []
     for i in range(board_size):
-        output.append(Piece(COLOR_BLUE, letters[i], 0, i))
+        output.append(Piece("B", letters[i], 0, i))
     for i in range(board_size):
-        output.append(Piece(COLOR_BLUE, "P", 1, i))
+        output.append(Piece("B", "P", 1, i))
     for i in range(board_size):
-        output.append(Piece(COLOR_GREEN, "P", board_size - 2, i))
+        output.append(Piece("W", "P", board_size - 2, i))
     for i in range(board_size):
-        output.append(Piece(COLOR_GREEN, letters[i], board_size - 1, i))
+        output.append(Piece("W", letters[i], board_size - 1, i))
     return output
 
 def search_by_indexes(pieces, i,j):

@@ -2,7 +2,6 @@ import subprocess
 import sys
 
 from board import build_pieces, search_by_indexes
-from colors import COLOR_DEFAULT
 
 FIRST_IA = ""
 SECOND_IA = ""
@@ -34,14 +33,18 @@ def play(board_size, args):
 def print_board(pieces):
     """Prints the board"""
     board_size = 8
+    color_map = {
+        'B':'\033[94m',
+        'W':'\033[92m'
+    }
     for i in range(board_size):
         for j in range(board_size):
             piece = search_by_indexes(pieces, i,j)
             output = "["
             if piece is not None:
-                output += piece.color
+                output += color_map[piece.color]
                 output += piece.name
-                output += COLOR_DEFAULT
+                output += '\033[0m'
             else:
                 output += " "
             output += "]"
