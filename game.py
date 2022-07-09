@@ -9,15 +9,23 @@ from utils import print_board
 
 def play(board_size, args):
     """Starts the game"""
+    turn_number = 0
     pieces = build_pieces(board_size)
-    print_board(pieces)
-    pieces = play_turn(board_size, pieces, args[0])
-    print_board(pieces)
+    while True:
+        print_board(pieces)
+        turn_color = "W"
+        turn_number += 1
+        pieces = play_turn(board_size, turn_number, turn_color, pieces, args[0])
+        print_board(pieces)
+        turn_color = "B"
+        turn_number += 1
+        pieces = play_turn(board_size, turn_number, turn_color, pieces, args[0])
+        break
 
 
-def play_turn(board_size, pieces, cmd):
+def play_turn(board_size, turn_number, turn_color, pieces, cmd):
     """Plays the turn with the given executable command"""
-    state = GameState(board_size, pieces)
+    state = GameState(board_size, turn_number, turn_color, pieces)
     with subprocess.Popen(
             f'{cmd} "{jsonpickle.encode(state)}"',
             stdout=subprocess.PIPE,
