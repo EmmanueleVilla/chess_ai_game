@@ -1,4 +1,4 @@
-from board import build_pieces
+from board import build_pieces, search_by_indexes
 from piece import Piece
 
 
@@ -37,3 +37,21 @@ def test_build_pieces():
     assert pieces[29] == Piece("W", "B", 7, 5)
     assert pieces[30] == Piece("W", "N", 7, 6)
     assert pieces[31] == Piece("W", "T", 7, 7)
+
+
+def test_search_by_indexes_match():
+    """Tests the search by indexes finding something"""
+    pieces = [Piece("", "", 0, 0)]
+    assert search_by_indexes(pieces, 0, 0) == pieces[0]
+
+
+def test_search_by_indexes_empty_pieces():
+    """Tests the search by indexes finding nothing because array is empty"""
+    pieces = []
+    assert search_by_indexes(pieces, 0, 0) is None
+
+
+def test_search_by_indexes_not_match():
+    """Tests the search by indexes finding nothing because no matches are present"""
+    pieces = [Piece("", "", 0, 0)]
+    assert search_by_indexes(pieces, 0, 1) is None
