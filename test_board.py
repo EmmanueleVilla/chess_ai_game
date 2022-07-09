@@ -21,7 +21,7 @@ def test_build_pieces():
     assert pieces[13] == Piece("B", "P", 1, 5)
     assert pieces[14] == Piece("B", "P", 1, 6)
     assert pieces[15] == Piece("B", "P", 1, 7)
-    assert pieces[16] ==  Piece("W", "P", 6, 0)
+    assert pieces[16] == Piece("W", "P", 6, 0)
     assert pieces[17] == Piece("W", "P", 6, 1)
     assert pieces[18] == Piece("W", "P", 6, 2)
     assert pieces[19] == Piece("W", "P", 6, 3)

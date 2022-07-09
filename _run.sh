@@ -1,2 +1,2 @@
 #!/bin/sh
-python3 main.py 1 2
+python3 main.py "python3 AI/stupid_ai.py" "python3 AI/stupid_ai.py"

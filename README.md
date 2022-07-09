@@ -6,7 +6,8 @@ It's a work in progress and I'm just learning python, so it sucks :)
 
 ## Description
 
-Chess AI Game is a game where you develop your own artificial intelligence to play chess and attach it to the main executable to play.
+Chess AI Game is a game where you develop your own artificial intelligence to play chess and attach it to the main
+executable to play.
 
 Yes, I know there are already lots of programs like this and official AI tournaments and stuff, this is just an exercise
 
@@ -28,6 +29,7 @@ The output will be the board:
 
 ![Board](/images/preview.png "The board")
 
-The AI executable will receive the state of the board via args, must print to the console the move and then exit(0). The communication interface is yet to be determined.
+The AI executable will receive the state of the board via args, must print to the console the move and then exit(0). The
+communication interface is yet to be determined.
 
 During play, a log file with all the moves will be saved for training.
