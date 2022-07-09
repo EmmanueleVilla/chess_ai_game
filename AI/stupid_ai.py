@@ -3,7 +3,8 @@ import sys
 
 def main():
     """Main method"""
-    print("6:0-5:0")
+    args = sys.argv[1:]
+    print(args[0])
 
 
 main()

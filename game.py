@@ -18,9 +18,8 @@ def play(board_size, args):
 def play_turn(board_size, pieces, cmd):
     """Plays the turn with the given executable command"""
     state = GameState(board_size, pieces)
-    print(jsonpickle.encode(state))
     with subprocess.Popen(
-            cmd,
+            f'{cmd} "{jsonpickle.encode(state)}"',
             stdout=subprocess.PIPE,
             bufsize=1,
             universal_newlines=True,
