@@ -3,9 +3,6 @@ import sys
 
 from board import build_pieces, search_by_indexes
 
-FIRST_IA = ""
-SECOND_IA = ""
-
 def print_help():
     """Prints the usage of this main"""
     print("Usage: main.py {first_ia_path} {second_ia_path}")
