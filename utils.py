@@ -10,9 +10,9 @@ def print_board(pieces):
         'B': '\033[94m',
         'W': '\033[92m'
     }
-    for i in reversed(range(1, board_size + 1)):
-        print(f'{gray}[{i}]{white}', end="")
-        for j in range(1, board_size + 1):
+    for j in reversed(range(1, board_size + 1)):
+        print(f'{gray}[{j}]{white}', end="")
+        for i in range(1, board_size + 1):
             piece = search_by_indexes(pieces, i, j)
             output = "["
             if piece is not None:

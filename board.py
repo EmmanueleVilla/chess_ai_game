@@ -4,16 +4,16 @@ from piece import Piece
 def build_pieces(board_size):
     """Builds the starting game pieces"""
     assert board_size == 8
-    letters = ["T", "N", "B", "Q", "K", "B", "N", "T"]
+    letters = ["R", "N", "B", "Q", "K", "B", "N", "R"]
     output = []
     for i in range(1, board_size + 1):
-        output.append(Piece("W", letters[i - 1], 1, i))
+        output.append(Piece("W", letters[i - 1], i, 1))
     for i in range(1, board_size + 1):
-        output.append(Piece("W", "P", 2, i))
+        output.append(Piece("W", "P", i, 2))
     for i in range(1, board_size + 1):
-        output.append(Piece("B", "P", board_size - 1, i))
+        output.append(Piece("B", "P", i, board_size - 1))
     for i in range(1, board_size + 1):
-        output.append(Piece("B", letters[i - 1], board_size, i))
+        output.append(Piece("B", letters[i - 1], i, board_size))
     return output
 
 
