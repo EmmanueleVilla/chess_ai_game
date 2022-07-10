@@ -40,7 +40,7 @@ def get_moves_with_direction(board_size, piece, pieces, delta_i, delta_j, stop_o
         if i > board_size or j > board_size:
             break
         occupier = search_by_indexes(pieces, i, j)
-        if occupier is not None and (occupier.color != piece.color or stop_on_enemy):
+        if occupier is not None and (occupier.color == piece.color or stop_on_enemy):
             break
         output.append(append_piece(piece, i, j))
     return output

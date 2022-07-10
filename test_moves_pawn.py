@@ -11,8 +11,8 @@ def test_pawn_start_moves_white():
     assert result[1] == "Pa2a4"
 
 
-def test_pawn_start_moves_blocked_path_2_white():
-    """Tests the available rules of a pawn that never moved before but has a blocked path 2 blocks ahead"""
+def test_pawn_start_moves_blocked_path_2_white_ally():
+    """Tests the available rules of a pawn that never moved before but has a blocked path 2 blocks ahead by an ally"""
     piece = Piece("W", "P", 1, 2, False)
     blocker = Piece("W", "P", 1, 4)
     result = get_moves_pawn(8, piece, [piece, blocker])
@@ -20,10 +20,27 @@ def test_pawn_start_moves_blocked_path_2_white():
     assert result[0] == "Pa2a3"
 
 
-def test_pawn_start_moves_blocked_path_1_white():
-    """Tests the available rules of a pawn that never moved before but has a blocked path 1 block ahead"""
+def test_pawn_start_moves_blocked_path_1_white_ally():
+    """Tests the available rules of a pawn that never moved before but has a blocked path 1 block ahead by an ally"""
     piece = Piece("W", "P", 1, 2, False)
     blocker = Piece("W", "P", 1, 3)
+    result = get_moves_pawn(8, piece, [piece, blocker])
+    assert len(result) == 0
+
+
+def test_pawn_start_moves_blocked_path_2_white_enemy():
+    """Tests the available rules of a pawn that never moved before but has a blocked path 2 blocks ahead by an enemy"""
+    piece = Piece("W", "P", 1, 2, False)
+    blocker = Piece("B", "P", 1, 4)
+    result = get_moves_pawn(8, piece, [piece, blocker])
+    assert len(result) == 1
+    assert result[0] == "Pa2a3"
+
+
+def test_pawn_start_moves_blocked_path_1_white_enemy():
+    """Tests the available rules of a pawn that never moved before but has a blocked path 1 block ahead by an enemy"""
+    piece = Piece("W", "P", 1, 2, False)
+    blocker = Piece("B", "P", 1, 3)
     result = get_moves_pawn(8, piece, [piece, blocker])
     assert len(result) == 0
 
