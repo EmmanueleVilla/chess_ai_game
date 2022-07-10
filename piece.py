@@ -1,18 +1,19 @@
 from coord import Coord
 
 
+def to_letter(coordinate):
+    """Returns the i coordinate as a letter"""
+    assert 0 < coordinate < 8
+    letters = "a b c d e f g h".split(" ")
+    return letters[coordinate - 1]
+
+
 class Piece:
     """Represents a piece on the board"""
 
     def i(self):
         """Returns the i coordinate"""
         return self.coord.i
-
-    def i_as_letter(self):
-        """Returns the i coordinate as a letter"""
-        assert self.coord.i > 0
-        letters = "a b c d e f g h".split(" ")
-        return letters[self.coord.i - 1]
 
     def j(self):
         """Returns the j coordinate"""
@@ -33,4 +34,4 @@ class Piece:
         )
 
     def __str__(self):
-        return f'{self.name}{self.color}: {self.i_as_letter()}{self.j()}'
+        return f'{self.name}{self.color}: {to_letter(self.i())}{self.j()}'

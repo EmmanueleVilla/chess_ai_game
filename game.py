@@ -4,7 +4,7 @@ import jsonpickle
 
 from board import build_pieces
 from game_state import GameState
-from moves import get_moves
+from moves_global import get_moves
 from utils import print_board
 
 
@@ -16,7 +16,7 @@ def play(board_size, args):
         print_board(pieces)
         turn_color = "W"
         turn_number += 1
-        print(jsonpickle.encode(get_moves(pieces[12], pieces)))
+        print(jsonpickle.encode(get_moves(board_size, pieces[10], pieces)))
         pieces = play_turn(board_size, turn_number, turn_color, pieces, args[0])
         print_board(pieces)
         turn_color = "B"

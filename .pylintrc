@@ -2,4 +2,5 @@
 disable=
     C0114, # missing-module-docstring
     R0903, # too-few-public-methods
-max-args = 6
+max-args = 10
+max-line-length=120
