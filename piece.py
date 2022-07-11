@@ -3,7 +3,7 @@ from coord import Coord
 
 def to_letter(coordinate):
     """Returns the i coordinate as a letter"""
-    assert 0 < coordinate < 8
+    assert 0 < coordinate < 9
     letters = "a b c d e f g h".split(" ")
     return letters[coordinate - 1]
 

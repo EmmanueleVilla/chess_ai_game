@@ -40,7 +40,10 @@ def get_moves_with_direction(board_size, piece, pieces, delta_i, delta_j, stop_o
         if i > board_size or j > board_size or i < 1 or j < 1:
             break
         occupier = search_by_indexes(pieces, i, j)
-        if occupier is not None and (occupier.color == piece.color or stop_on_enemy):
+        if occupier is not None:
+            if occupier.color == piece.color or stop_on_enemy:
+                break
+            output.append(append_piece(piece, i, j))
             break
         output.append(append_piece(piece, i, j))
     return output
@@ -67,7 +70,11 @@ def get_moves_pawn(board_size, piece, pieces):
 def get_moves_rook(board_size, piece, pieces):
     """Returns the available moves of the given rook in the given board"""
     check_moves_args(board_size, piece, pieces, "R")
-    return []
+    top = get_moves_with_direction(board_size, piece, pieces, 0, 1, board_size, False)
+    bottom = get_moves_with_direction(board_size, piece, pieces, 0, -1, board_size, False)
+    right = get_moves_with_direction(board_size, piece, pieces, 1, 0, board_size, False)
+    left = get_moves_with_direction(board_size, piece, pieces, -1, 0, board_size, False)
+    return top + bottom + right + left
 
 
 def get_moves_knight(board_size, piece, pieces):
