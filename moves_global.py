@@ -1,5 +1,5 @@
 from board import search_by_indexes
-from piece import to_letter
+from piece import to_letter, Piece
 
 
 def get_moves(board_size, piece, pieces):
@@ -23,9 +23,16 @@ def check_moves_args(board_size, piece, pieces, name):
     assert piece.name == name
 
 
-def append_piece(piece, i, j):
+def append_piece(piece: Piece, i: int, j: int, capture: bool = False):
     """Joins the piece information and the arrival cell"""
-    return f'{piece.name}{to_letter(piece.i())}{piece.j()}{to_letter(i)}{j}'
+    output = piece.name if piece.name != "P" else ""
+    if piece.name == "P" and capture:
+        output += to_letter(piece.i())
+    if capture:
+        output += "x"
+    output += to_letter(i)
+    output += f'{j}'
+    return output
 
 
 def get_moves_with_direction(board_size, piece, pieces, delta_i, delta_j, stop_on_count, stop_on_enemy, only_on_enemy):
@@ -45,7 +52,7 @@ def get_moves_with_direction(board_size, piece, pieces, delta_i, delta_j, stop_o
         if occupier is not None:
             if occupier.color == piece.color or stop_on_enemy:
                 break
-            output.append(append_piece(piece, i, j))
+            output.append(append_piece(piece, i, j, True))
             break
         if occupier is None and only_on_enemy:
             break

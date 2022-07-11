@@ -10,9 +10,9 @@ def test_pawn_start_catch_right_white():
     print_board(8, [piece, enemy])
     result = get_moves_pawn(8, piece, [piece, enemy])
     assert len(result) == 3
-    assert "Pa2a3" in result
-    assert "Pa2a4" in result
-    assert "Pa2b3" in result
+    assert "a3" in result
+    assert "a4" in result
+    assert "axb3" in result
 
 
 def test_pawn_start_catch_right_black():
@@ -22,9 +22,9 @@ def test_pawn_start_catch_right_black():
     print_board(8, [piece, enemy])
     result = get_moves_pawn(8, piece, [piece, enemy])
     assert len(result) == 3
-    assert "Pc3c2" in result
-    assert "Pc3c1" in result
-    assert "Pc3b2" in result
+    assert "c2" in result
+    assert "c1" in result
+    assert "cxb2" in result
 
 
 def test_pawn_start_catch_left_black():
@@ -34,9 +34,9 @@ def test_pawn_start_catch_left_black():
     print_board(8, [piece, enemy])
     result = get_moves_pawn(8, piece, [piece, enemy])
     assert len(result) == 3
-    assert "Pc3c2" in result
-    assert "Pc3c1" in result
-    assert "Pc3d2" in result
+    assert "c2" in result
+    assert "c1" in result
+    assert "cxd2" in result
 
 
 def test_pawn_start_catch_left_white():
@@ -46,6 +46,6 @@ def test_pawn_start_catch_left_white():
     print_board(8, [piece, enemy])
     result = get_moves_pawn(8, piece, [piece, enemy])
     assert len(result) == 3
-    assert "Pb1b2" in result
-    assert "Pb1b3" in result
-    assert "Pb1a2" in result
+    assert "b2" in result
+    assert "b3" in result
+    assert "bxa2" in result

@@ -7,20 +7,20 @@ def test_rook_free():
     piece = Piece("W", "R", 4, 6, False)
     result = get_moves_rook(8, piece, [piece])
     assert len(result) == 14
-    assert "Rd6d7" in result
-    assert "Rd6d8" in result
-    assert "Rd6d5" in result
-    assert "Rd6d4" in result
-    assert "Rd6d3" in result
-    assert "Rd6d2" in result
-    assert "Rd6d1" in result
-    assert "Rd6e6" in result
-    assert "Rd6f6" in result
-    assert "Rd6g6" in result
-    assert "Rd6h6" in result
-    assert "Rd6c6" in result
-    assert "Rd6b6" in result
-    assert "Rd6a6" in result
+    assert "Rd7" in result
+    assert "Rd8" in result
+    assert "Rd5" in result
+    assert "Rd4" in result
+    assert "Rd3" in result
+    assert "Rd2" in result
+    assert "Rd1" in result
+    assert "Re6" in result
+    assert "Rf6" in result
+    assert "Rg6" in result
+    assert "Rh6" in result
+    assert "Rc6" in result
+    assert "Rb6" in result
+    assert "Ra6" in result
 
 
 def test_rook_friendly():
@@ -29,18 +29,18 @@ def test_rook_friendly():
     friend = Piece("W", "P", 2, 6, False)
     result = get_moves_rook(8, piece, [piece, friend])
     assert len(result) == 12
-    assert "Rd6d7" in result
-    assert "Rd6d8" in result
-    assert "Rd6d5" in result
-    assert "Rd6d4" in result
-    assert "Rd6d3" in result
-    assert "Rd6d2" in result
-    assert "Rd6d1" in result
-    assert "Rd6e6" in result
-    assert "Rd6f6" in result
-    assert "Rd6g6" in result
-    assert "Rd6h6" in result
-    assert "Rd6c6" in result
+    assert "Rd7" in result
+    assert "Rd8" in result
+    assert "Rd5" in result
+    assert "Rd4" in result
+    assert "Rd3" in result
+    assert "Rd2" in result
+    assert "Rd1" in result
+    assert "Re6" in result
+    assert "Rf6" in result
+    assert "Rg6" in result
+    assert "Rh6" in result
+    assert "Rc6" in result
 
 
 def test_rook_enemy():
@@ -49,16 +49,16 @@ def test_rook_enemy():
     friend = Piece("B", "P", 2, 6, False)
     result = get_moves_rook(8, piece, [piece, friend])
     assert len(result) == 13
-    assert "Rd6d7" in result
-    assert "Rd6d8" in result
-    assert "Rd6d5" in result
-    assert "Rd6d4" in result
-    assert "Rd6d3" in result
-    assert "Rd6d2" in result
-    assert "Rd6d1" in result
-    assert "Rd6e6" in result
-    assert "Rd6f6" in result
-    assert "Rd6g6" in result
-    assert "Rd6h6" in result
-    assert "Rd6c6" in result
-    assert "Rd6b6" in result
+    assert "Rd7" in result
+    assert "Rd8" in result
+    assert "Rd5" in result
+    assert "Rd4" in result
+    assert "Rd3" in result
+    assert "Rd2" in result
+    assert "Rd1" in result
+    assert "Re6" in result
+    assert "Rf6" in result
+    assert "Rg6" in result
+    assert "Rh6" in result
+    assert "Rc6" in result
+    assert "Rxb6" in result
