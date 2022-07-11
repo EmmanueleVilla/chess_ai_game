@@ -30,7 +30,9 @@ def append_piece(piece, i, j):
 
 def get_moves_with_direction(board_size, piece, pieces, delta_i, delta_j, stop_on_count, stop_on_enemy, only_on_enemy):
     """Calculate the possible moves in the given direction,
-    moving by the given delta and stopping at the given conditions"""
+    moving by the given delta and stopping at the given conditions.
+    The majority of pieces have stop_on_count=8, stop_on_enemy=False and only_on_enemy=False
+    A different base method may be useful for comprehension and performance"""
     output = []
     i = piece.i()
     j = piece.j()
@@ -61,11 +63,15 @@ def get_moves_pawn(board_size, piece, pieces):
     forward = get_moves_with_direction(board_size, piece, pieces, 0, direction, 1 if piece.moved else 2,
                                        stop_on_enemy=True,
                                        only_on_enemy=False)
-    diagonal = get_moves_with_direction(board_size, piece, pieces, 1, direction, 1,
-                                        stop_on_enemy=False,
-                                        only_on_enemy=True)
+    right = get_moves_with_direction(board_size, piece, pieces, 1, direction, 1,
+                                     stop_on_enemy=False,
+                                     only_on_enemy=True)
+    left = get_moves_with_direction(board_size, piece, pieces, -1,
+                                    direction, 1,
+                                    stop_on_enemy=False,
+                                    only_on_enemy=True)
     # add en-passant capture
-    return forward + diagonal
+    return forward + right + left
 
 
 def get_moves_rook(board_size, piece, pieces):
