@@ -1,14 +1,14 @@
-from moves_global import get_moves_pawn
+from moves import get_moves_pawn
 from piece import Piece
+from tests.base import assert_same_array
 
 
 def test_pawn_start_moves_black():
     """Tests the available rules of a pawn that never moved before"""
     piece = Piece("B", "P", 1, 7, False)
     result = get_moves_pawn(8, piece, [piece])
-    assert len(result) == 2
-    assert "a6" in result
-    assert "a5" in result
+    expected = ["a5", "a6"]
+    assert_same_array(result, expected)
 
 
 def test_pawn_start_moves_blocked_path_2_black_enemy():
@@ -16,8 +16,8 @@ def test_pawn_start_moves_blocked_path_2_black_enemy():
     piece = Piece("B", "P", 1, 7, False)
     blocker = Piece("W", "P", 1, 5)
     result = get_moves_pawn(8, piece, [piece, blocker])
-    assert len(result) == 1
-    assert "a6" in result
+    expected = ["a6"]
+    assert_same_array(result, expected)
 
 
 def test_pawn_start_moves_blocked_path_1_black_enemy():
@@ -33,8 +33,8 @@ def test_pawn_start_moves_blocked_path_2_black_ally():
     piece = Piece("B", "P", 1, 7, False)
     blocker = Piece("B", "P", 1, 5)
     result = get_moves_pawn(8, piece, [piece, blocker])
-    assert len(result) == 1
-    assert "a6" in result
+    expected = ["a6"]
+    assert_same_array(result, expected)
 
 
 def test_pawn_start_moves_blocked_path_1_black_ally():
@@ -49,8 +49,8 @@ def test_pawn_already_moved_black():
     """Tests the available rules of a pawn that already moved before"""
     piece = Piece("B", "P", 1, 7, True)
     result = get_moves_pawn(8, piece, [piece])
-    assert len(result) == 1
-    assert "a6" in result
+    expected = ["a6"]
+    assert_same_array(result, expected)
 
 
 def test_pawn_already_moved_blocked_path_black():

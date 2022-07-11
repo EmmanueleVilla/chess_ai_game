@@ -1,26 +1,14 @@
-from moves_global import get_moves_rook
+from moves import get_moves_rook
 from piece import Piece
+from tests.base import assert_same_array
 
 
 def test_rook_free():
     """Tests the available rules of a rook with full free space"""
     piece = Piece("W", "R", 4, 6, False)
     result = get_moves_rook(8, piece, [piece])
-    assert len(result) == 14
-    assert "Rd7" in result
-    assert "Rd8" in result
-    assert "Rd5" in result
-    assert "Rd4" in result
-    assert "Rd3" in result
-    assert "Rd2" in result
-    assert "Rd1" in result
-    assert "Re6" in result
-    assert "Rf6" in result
-    assert "Rg6" in result
-    assert "Rh6" in result
-    assert "Rc6" in result
-    assert "Rb6" in result
-    assert "Ra6" in result
+    expected = ["Rd7", "Rd8", "Rd5", "Rd4", "Rd3", "Rd2", "Rd1", "Re6", "Rf6", "Rg6", "Rh6", "Rc6", "Rb6", "Ra6"]
+    assert_same_array(result, expected)
 
 
 def test_rook_friendly():
@@ -28,37 +16,14 @@ def test_rook_friendly():
     piece = Piece("W", "R", 4, 6, False)
     friend = Piece("W", "P", 2, 6, False)
     result = get_moves_rook(8, piece, [piece, friend])
-    assert len(result) == 12
-    assert "Rd7" in result
-    assert "Rd8" in result
-    assert "Rd5" in result
-    assert "Rd4" in result
-    assert "Rd3" in result
-    assert "Rd2" in result
-    assert "Rd1" in result
-    assert "Re6" in result
-    assert "Rf6" in result
-    assert "Rg6" in result
-    assert "Rh6" in result
-    assert "Rc6" in result
+    expected = ["Rd7", "Rd8", "Rd5", "Rd4", "Rd3", "Rd2", "Rd1", "Re6", "Rf6", "Rg6", "Rh6", "Rc6"]
+    assert_same_array(result, expected)
 
 
 def test_rook_enemy():
     """Tests the available rules of a rook with an enemy pawn that stops it"""
     piece = Piece("W", "R", 4, 6, False)
-    friend = Piece("B", "P", 2, 6, False)
-    result = get_moves_rook(8, piece, [piece, friend])
-    assert len(result) == 13
-    assert "Rd7" in result
-    assert "Rd8" in result
-    assert "Rd5" in result
-    assert "Rd4" in result
-    assert "Rd3" in result
-    assert "Rd2" in result
-    assert "Rd1" in result
-    assert "Re6" in result
-    assert "Rf6" in result
-    assert "Rg6" in result
-    assert "Rh6" in result
-    assert "Rc6" in result
-    assert "Rxb6" in result
+    enemy = Piece("B", "P", 2, 6, False)
+    result = get_moves_rook(8, piece, [piece, enemy])
+    expected = ["Rd7", "Rd8", "Rd5", "Rd4", "Rd3", "Rd2", "Rd1", "Re6", "Rf6", "Rg6", "Rh6", "Rc6", "Rxb6"]
+    assert_same_array(result, expected)

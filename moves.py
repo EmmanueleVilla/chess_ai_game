@@ -1,3 +1,5 @@
+from functools import reduce
+
 from board import search_by_indexes
 from piece import to_letter, Piece
 
@@ -16,30 +18,20 @@ def get_moves(board_size, piece, pieces):
     return switcher[piece.name](board_size, piece, pieces)
 
 
-def check_moves_args(board_size, piece, pieces, name):
-    """Checks if the arguments are legal"""
-    assert board_size == 8
-    assert piece in pieces
-    assert piece.name == name
-
-
 def append_piece(piece: Piece, i: int, j: int, capture: bool = False):
     """Joins the piece information and the arrival cell"""
     output = piece.name if piece.name != "P" else ""
-    if piece.name == "P" and capture:
-        output += to_letter(piece.i())
-    if capture:
-        output += "x"
+    output += to_letter(piece.i()) if piece.name == "P" and capture else ""
+    output += "x" if capture else ""
     output += to_letter(i)
     output += f'{j}'
     return output
 
 
-def get_moves_with_direction(board_size, piece, pieces, delta_i, delta_j, stop_on_count, stop_on_enemy, only_on_enemy):
+def get_moves_with_direction(board_size: int, piece: Piece, pieces: [Piece], delta_i: int, delta_j: int,
+                             stop_on_count: int, stop_on_enemy=False, only_on_enemy=False):
     """Calculate the possible moves in the given direction,
-    moving by the given delta and stopping at the given conditions.
-    The majority of pieces have stop_on_count=8, stop_on_enemy=False and only_on_enemy=False
-    A different base method may be useful for comprehension and performance"""
+    moving by the given delta and stopping at the given conditions."""
     output = []
     i = piece.i()
     j = piece.j()
@@ -62,20 +54,14 @@ def get_moves_with_direction(board_size, piece, pieces, delta_i, delta_j, stop_o
 
 def get_moves_pawn(board_size, piece, pieces):
     """Returns the available moves of the given pawn in the given board"""
-    check_moves_args(board_size, piece, pieces, "P")
-
-    # Forward direction
     direction = -1 if piece.color == "B" else 1
 
     forward = get_moves_with_direction(board_size, piece, pieces, 0, direction, 1 if piece.moved else 2,
-                                       stop_on_enemy=True,
-                                       only_on_enemy=False)
+                                       stop_on_enemy=True)
     right = get_moves_with_direction(board_size, piece, pieces, 1, direction, 1,
-                                     stop_on_enemy=False,
                                      only_on_enemy=True)
     left = get_moves_with_direction(board_size, piece, pieces, -1,
                                     direction, 1,
-                                    stop_on_enemy=False,
                                     only_on_enemy=True)
     # add en-passant capture
     return forward + right + left
@@ -83,41 +69,71 @@ def get_moves_pawn(board_size, piece, pieces):
 
 def get_moves_rook(board_size, piece, pieces):
     """Returns the available moves of the given rook in the given board"""
-    check_moves_args(board_size, piece, pieces, "R")
-    top = get_moves_with_direction(board_size, piece, pieces, 0, 1, board_size,
-                                   stop_on_enemy=False,
-                                   only_on_enemy=False)
-    bottom = get_moves_with_direction(board_size, piece, pieces, 0, -1, board_size,
-                                      stop_on_enemy=False,
-                                      only_on_enemy=False)
-    right = get_moves_with_direction(board_size, piece, pieces, 1, 0, board_size,
-                                     stop_on_enemy=False,
-                                     only_on_enemy=False)
-    left = get_moves_with_direction(board_size, piece, pieces, -1, 0, board_size,
-                                    stop_on_enemy=False,
-                                    only_on_enemy=False)
-    return top + bottom + right + left
-
-
-def get_moves_knight(board_size, piece, pieces):
-    """Returns the available moves of the given knight in the given board"""
-    check_moves_args(board_size, piece, pieces, "N")
-    return []
+    deltas = [
+        (0, 1),
+        (0, -1),
+        (1, 0),
+        (-1, 0)
+    ]
+    return get_moves_from_deltas(board_size, piece, pieces, deltas)
 
 
 def get_moves_bishop(board_size, piece, pieces):
     """Returns the available moves of the given bishop in the given board"""
-    check_moves_args(board_size, piece, pieces, "B")
+    deltas = [
+        (1, 1),
+        (1, -1),
+        (-1, 1),
+        (-1, -1)
+    ]
+    return get_moves_from_deltas(board_size, piece, pieces, deltas)
+
+
+def get_moves_knight(board_size, piece, pieces):
+    """Returns the available moves of the given knight in the given board"""
+    print(board_size)
+    print(piece)
+    print(pieces)
     return []
 
 
 def get_moves_queen(board_size, piece, pieces):
     """Returns the available moves of the given queen in the given board"""
-    check_moves_args(board_size, piece, pieces, "Q")
-    return []
+    deltas = [
+        (0, 1),
+        (0, -1),
+        (1, 0),
+        (-1, 0),
+        (1, 1),
+        (1, -1),
+        (-1, 1),
+        (-1, -1)
+    ]
+    return get_moves_from_deltas(board_size, piece, pieces, deltas)
 
 
 def get_moves_king(board_size, piece, pieces):
     """Returns the available moves of the given king in the given board"""
-    check_moves_args(board_size, piece, pieces, "K")
-    return []
+    deltas = [
+        (0, 1),
+        (0, -1),
+        (1, 0),
+        (-1, 0),
+        (1, 1),
+        (1, -1),
+        (-1, 1),
+        (-1, -1)
+    ]
+    return get_moves_from_deltas_with_max_distance(board_size, piece, pieces, deltas, 1)
+
+
+def get_moves_from_deltas(board_size, piece, pieces, deltas):
+    """Returns the available moves of the given piece in the given directions with standard breaks"""
+    return reduce(lambda x, y: x + y,
+                  [get_moves_with_direction(board_size, piece, pieces, d[0], d[1], board_size) for d in deltas])
+
+
+def get_moves_from_deltas_with_max_distance(board_size, piece, pieces, deltas, max_distance):
+    """Returns the available moves of the given piece in the given directions with standard breaks"""
+    return reduce(lambda x, y: x + y,
+                  [get_moves_with_direction(board_size, piece, pieces, d[0], d[1], max_distance) for d in deltas])

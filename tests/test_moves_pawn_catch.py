@@ -1,4 +1,4 @@
-from moves_global import get_moves_pawn
+from moves import get_moves_pawn
 from piece import Piece
 from utils import print_board
 

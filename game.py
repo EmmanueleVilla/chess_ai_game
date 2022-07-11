@@ -4,7 +4,7 @@ import jsonpickle
 
 from board import build_pieces
 from game_state import GameState
-from moves_global import get_moves
+from moves import get_moves
 from utils import print_board
 
 
