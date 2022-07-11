@@ -7,20 +7,20 @@ def test_rook_free():
     piece = Piece("W", "R", 4, 6, False)
     result = get_moves_rook(8, piece, [piece])
     assert len(result) == 14
-    assert result[0] == "Rd6d7"
-    assert result[1] == "Rd6d8"
-    assert result[2] == "Rd6d5"
-    assert result[3] == "Rd6d4"
-    assert result[4] == "Rd6d3"
-    assert result[5] == "Rd6d2"
-    assert result[6] == "Rd6d1"
-    assert result[7] == "Rd6e6"
-    assert result[8] == "Rd6f6"
-    assert result[9] == "Rd6g6"
-    assert result[10] == "Rd6h6"
-    assert result[11] == "Rd6c6"
-    assert result[12] == "Rd6b6"
-    assert result[13] == "Rd6a6"
+    assert "Rd6d7" in result
+    assert "Rd6d8" in result
+    assert "Rd6d5" in result
+    assert "Rd6d4" in result
+    assert "Rd6d3" in result
+    assert "Rd6d2" in result
+    assert "Rd6d1" in result
+    assert "Rd6e6" in result
+    assert "Rd6f6" in result
+    assert "Rd6g6" in result
+    assert "Rd6h6" in result
+    assert "Rd6c6" in result
+    assert "Rd6b6" in result
+    assert "Rd6a6" in result
 
 
 def test_rook_friendly():
@@ -29,18 +29,18 @@ def test_rook_friendly():
     friend = Piece("W", "P", 2, 6, False)
     result = get_moves_rook(8, piece, [piece, friend])
     assert len(result) == 12
-    assert result[0] == "Rd6d7"
-    assert result[1] == "Rd6d8"
-    assert result[2] == "Rd6d5"
-    assert result[3] == "Rd6d4"
-    assert result[4] == "Rd6d3"
-    assert result[5] == "Rd6d2"
-    assert result[6] == "Rd6d1"
-    assert result[7] == "Rd6e6"
-    assert result[8] == "Rd6f6"
-    assert result[9] == "Rd6g6"
-    assert result[10] == "Rd6h6"
-    assert result[11] == "Rd6c6"
+    assert "Rd6d7" in result
+    assert "Rd6d8" in result
+    assert "Rd6d5" in result
+    assert "Rd6d4" in result
+    assert "Rd6d3" in result
+    assert "Rd6d2" in result
+    assert "Rd6d1" in result
+    assert "Rd6e6" in result
+    assert "Rd6f6" in result
+    assert "Rd6g6" in result
+    assert "Rd6h6" in result
+    assert "Rd6c6" in result
 
 
 def test_rook_enemy():
@@ -49,16 +49,16 @@ def test_rook_enemy():
     friend = Piece("B", "P", 2, 6, False)
     result = get_moves_rook(8, piece, [piece, friend])
     assert len(result) == 13
-    assert result[0] == "Rd6d7"
-    assert result[1] == "Rd6d8"
-    assert result[2] == "Rd6d5"
-    assert result[3] == "Rd6d4"
-    assert result[4] == "Rd6d3"
-    assert result[5] == "Rd6d2"
-    assert result[6] == "Rd6d1"
-    assert result[7] == "Rd6e6"
-    assert result[8] == "Rd6f6"
-    assert result[9] == "Rd6g6"
-    assert result[10] == "Rd6h6"
-    assert result[11] == "Rd6c6"
-    assert result[12] == "Rd6b6"
+    assert "Rd6d7" in result
+    assert "Rd6d8" in result
+    assert "Rd6d5" in result
+    assert "Rd6d4" in result
+    assert "Rd6d3" in result
+    assert "Rd6d2" in result
+    assert "Rd6d1" in result
+    assert "Rd6e6" in result
+    assert "Rd6f6" in result
+    assert "Rd6g6" in result
+    assert "Rd6h6" in result
+    assert "Rd6c6" in result
+    assert "Rd6b6" in result

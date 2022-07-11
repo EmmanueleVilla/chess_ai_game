@@ -1,9 +1,8 @@
 from board import search_by_indexes
 
 
-def print_board(pieces):
+def print_board(board_size, pieces):
     """Prints the board"""
-    board_size = 8
     gray = '\033[90m'
     white = '\033[0m'
     color_map = {

@@ -7,8 +7,8 @@ def test_pawn_start_moves_white():
     piece = Piece("W", "P", 1, 2, False)
     result = get_moves_pawn(8, piece, [piece])
     assert len(result) == 2
-    assert result[0] == "Pa2a3"
-    assert result[1] == "Pa2a4"
+    assert "Pa2a3" in result
+    assert "Pa2a4" in result
 
 
 def test_pawn_start_moves_blocked_path_2_white_ally():
@@ -17,7 +17,7 @@ def test_pawn_start_moves_blocked_path_2_white_ally():
     blocker = Piece("W", "P", 1, 4)
     result = get_moves_pawn(8, piece, [piece, blocker])
     assert len(result) == 1
-    assert result[0] == "Pa2a3"
+    assert "Pa2a3" in result
 
 
 def test_pawn_start_moves_blocked_path_1_white_ally():
@@ -34,7 +34,7 @@ def test_pawn_start_moves_blocked_path_2_white_enemy():
     blocker = Piece("B", "P", 1, 4)
     result = get_moves_pawn(8, piece, [piece, blocker])
     assert len(result) == 1
-    assert result[0] == "Pa2a3"
+    assert "Pa2a3" in result
 
 
 def test_pawn_start_moves_blocked_path_1_white_enemy():
@@ -50,7 +50,7 @@ def test_pawn_already_moved_white():
     piece = Piece("W", "P", 1, 2, True)
     result = get_moves_pawn(8, piece, [piece])
     assert len(result) == 1
-    assert result[0] == "Pa2a3"
+    assert "Pa2a3" in result
 
 
 def test_pawn_already_moved_blocked_path_white():

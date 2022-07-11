@@ -13,12 +13,12 @@ def play(board_size, args):
     turn_number = 0
     pieces = build_pieces(board_size)
     while True:
-        print_board(pieces)
+        print_board(board_size, pieces)
         turn_color = "W"
         turn_number += 1
         print(jsonpickle.encode(get_moves(board_size, pieces[10], pieces)))
         pieces = play_turn(board_size, turn_number, turn_color, pieces, args[0])
-        print_board(pieces)
+        print_board(board_size, pieces)
         turn_color = "B"
         turn_number += 1
         pieces = play_turn(board_size, turn_number, turn_color, pieces, args[0])

@@ -28,7 +28,7 @@ def append_piece(piece, i, j):
     return f'{piece.name}{to_letter(piece.i())}{piece.j()}{to_letter(i)}{j}'
 
 
-def get_moves_with_direction(board_size, piece, pieces, delta_i, delta_j, stop_on_count, stop_on_enemy):
+def get_moves_with_direction(board_size, piece, pieces, delta_i, delta_j, stop_on_count, stop_on_enemy, only_on_enemy):
     """Calculate the possible moves in the given direction,
     moving by the given delta and stopping at the given conditions"""
     output = []
@@ -45,6 +45,8 @@ def get_moves_with_direction(board_size, piece, pieces, delta_i, delta_j, stop_o
                 break
             output.append(append_piece(piece, i, j))
             break
+        if occupier is None and only_on_enemy:
+            break
         output.append(append_piece(piece, i, j))
     return output
 
@@ -56,24 +58,31 @@ def get_moves_pawn(board_size, piece, pieces):
     # Forward direction
     direction = -1 if piece.color == "B" else 1
 
-    forward = get_moves_with_direction(board_size, piece, pieces, 0, direction, 1 if piece.moved else 2, True)
-
-    # Diagonal capture
-    delta_i = [-1, 1]
-    delta_j = [piece.j() + direction]
-    capture = [d for d in delta_i if search_by_indexes(pieces, piece.i() + d, delta_j[0]) is not None]
-    # add diagonal piece capture
+    forward = get_moves_with_direction(board_size, piece, pieces, 0, direction, 1 if piece.moved else 2,
+                                       stop_on_enemy=True,
+                                       only_on_enemy=False)
+    diagonal = get_moves_with_direction(board_size, piece, pieces, 1, direction, 1,
+                                        stop_on_enemy=False,
+                                        only_on_enemy=True)
     # add en-passant capture
-    return forward + list(append_piece(piece, r, delta_j[0]) for r in capture)
+    return forward + diagonal
 
 
 def get_moves_rook(board_size, piece, pieces):
     """Returns the available moves of the given rook in the given board"""
     check_moves_args(board_size, piece, pieces, "R")
-    top = get_moves_with_direction(board_size, piece, pieces, 0, 1, board_size, False)
-    bottom = get_moves_with_direction(board_size, piece, pieces, 0, -1, board_size, False)
-    right = get_moves_with_direction(board_size, piece, pieces, 1, 0, board_size, False)
-    left = get_moves_with_direction(board_size, piece, pieces, -1, 0, board_size, False)
+    top = get_moves_with_direction(board_size, piece, pieces, 0, 1, board_size,
+                                   stop_on_enemy=False,
+                                   only_on_enemy=False)
+    bottom = get_moves_with_direction(board_size, piece, pieces, 0, -1, board_size,
+                                      stop_on_enemy=False,
+                                      only_on_enemy=False)
+    right = get_moves_with_direction(board_size, piece, pieces, 1, 0, board_size,
+                                     stop_on_enemy=False,
+                                     only_on_enemy=False)
+    left = get_moves_with_direction(board_size, piece, pieces, -1, 0, board_size,
+                                    stop_on_enemy=False,
+                                    only_on_enemy=False)
     return top + bottom + right + left
 
 
