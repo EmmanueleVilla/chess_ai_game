@@ -1,4 +1,4 @@
-from moves import get_moves_rook
+from moves_single import get_moves_rook
 from piece import Piece
 from tests.base import assert_same_array
 
