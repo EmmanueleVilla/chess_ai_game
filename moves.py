@@ -63,67 +63,38 @@ def get_moves_pawn(board_size, piece, pieces):
     left = get_moves_with_direction(board_size, piece, pieces, -1,
                                     direction, 1,
                                     only_on_enemy=True)
-    # add en-passant capture
+    # Todo: add en-passant capture
     return forward + right + left
 
 
 def get_moves_rook(board_size, piece, pieces):
     """Returns the available moves of the given rook in the given board"""
-    deltas = [
-        (0, 1),
-        (0, -1),
-        (1, 0),
-        (-1, 0)
-    ]
+    deltas = [(0, 1), (0, -1), (1, 0), (-1, 0)]
     return get_moves_from_deltas(board_size, piece, pieces, deltas)
 
 
 def get_moves_bishop(board_size, piece, pieces):
     """Returns the available moves of the given bishop in the given board"""
-    deltas = [
-        (1, 1),
-        (1, -1),
-        (-1, 1),
-        (-1, -1)
-    ]
+    deltas = [(1, 1), (1, -1), (-1, 1), (-1, -1)]
     return get_moves_from_deltas(board_size, piece, pieces, deltas)
 
 
 def get_moves_knight(board_size, piece, pieces):
     """Returns the available moves of the given knight in the given board"""
-    print(board_size)
-    print(piece)
-    print(pieces)
-    return []
+    deltas = [(2, 1), (2, -1), (-2, 1), (-2, -1), (1, 2), (1, -2), (-1, 2), (-1, -2)]
+    return get_moves_from_deltas_with_max_distance(board_size, piece, pieces, deltas, 1)
 
 
 def get_moves_queen(board_size, piece, pieces):
     """Returns the available moves of the given queen in the given board"""
-    deltas = [
-        (0, 1),
-        (0, -1),
-        (1, 0),
-        (-1, 0),
-        (1, 1),
-        (1, -1),
-        (-1, 1),
-        (-1, -1)
-    ]
+    deltas = [(0, 1), (0, -1), (1, 0), (-1, 0), (1, 1), (1, -1), (-1, 1), (-1, -1)]
     return get_moves_from_deltas(board_size, piece, pieces, deltas)
 
 
 def get_moves_king(board_size, piece, pieces):
     """Returns the available moves of the given king in the given board"""
-    deltas = [
-        (0, 1),
-        (0, -1),
-        (1, 0),
-        (-1, 0),
-        (1, 1),
-        (1, -1),
-        (-1, 1),
-        (-1, -1)
-    ]
+    deltas = [(0, 1), (0, -1), (1, 0), (-1, 0), (1, 1), (1, -1), (-1, 1), (-1, -1)]
+    # Todo: Add castling
     return get_moves_from_deltas_with_max_distance(board_size, piece, pieces, deltas, 1)
 
 
