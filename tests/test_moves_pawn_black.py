@@ -8,7 +8,7 @@ def test_pawn_start_moves_black():
     piece = Piece("B", "P", 1, 7, False)
     result = get_moves_pawn(8, piece, [piece])
     expected = ["a5", "a6"]
-    assert_same_array(result, expected)
+    assert_same_array(expected, result)
 
 
 def test_pawn_start_moves_blocked_path_2_black_enemy():
@@ -17,7 +17,7 @@ def test_pawn_start_moves_blocked_path_2_black_enemy():
     blocker = Piece("W", "P", 1, 5)
     result = get_moves_pawn(8, piece, [piece, blocker])
     expected = ["a6"]
-    assert_same_array(result, expected)
+    assert_same_array(expected, result)
 
 
 def test_pawn_start_moves_blocked_path_1_black_enemy():
@@ -34,7 +34,7 @@ def test_pawn_start_moves_blocked_path_2_black_ally():
     blocker = Piece("B", "P", 1, 5)
     result = get_moves_pawn(8, piece, [piece, blocker])
     expected = ["a6"]
-    assert_same_array(result, expected)
+    assert_same_array(expected, result)
 
 
 def test_pawn_start_moves_blocked_path_1_black_ally():
@@ -50,7 +50,7 @@ def test_pawn_already_moved_black():
     piece = Piece("B", "P", 1, 7, True)
     result = get_moves_pawn(8, piece, [piece])
     expected = ["a6"]
-    assert_same_array(result, expected)
+    assert_same_array(expected, result)
 
 
 def test_pawn_already_moved_blocked_path_black():
