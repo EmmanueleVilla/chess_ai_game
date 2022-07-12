@@ -1,6 +1,6 @@
 from moves_single import get_moves_pawn
 from piece import Piece
-from tests.base import assert_same_array
+from tests.base import assert_same_move
 from utils import print_board
 
 
@@ -11,7 +11,7 @@ def test_pawn_start_catch_right_white():
     print_board(8, [piece, enemy])
     result = get_moves_pawn(8, piece, [piece, enemy])
     expected = ["a3", "a4", "axb3"]
-    assert_same_array(expected, result)
+    assert_same_move(expected, result)
 
 
 def test_pawn_start_catch_right_black():
@@ -21,7 +21,7 @@ def test_pawn_start_catch_right_black():
     print_board(8, [piece, enemy])
     result = get_moves_pawn(8, piece, [piece, enemy])
     expected = ["c2", "c1", "cxb2"]
-    assert_same_array(expected, result)
+    assert_same_move(expected, result)
 
 
 def test_pawn_start_catch_left_black():
@@ -31,7 +31,7 @@ def test_pawn_start_catch_left_black():
     print_board(8, [piece, enemy])
     result = get_moves_pawn(8, piece, [piece, enemy])
     expected = ["c2", "c1", "cxd2"]
-    assert_same_array(expected, result)
+    assert_same_move(expected, result)
 
 
 def test_pawn_start_catch_left_white():
@@ -41,4 +41,4 @@ def test_pawn_start_catch_left_white():
     print_board(8, [piece, enemy])
     result = get_moves_pawn(8, piece, [piece, enemy])
     expected = ["b2", "b3", "bxa2"]
-    assert_same_array(expected, result)
+    assert_same_move(expected, result)

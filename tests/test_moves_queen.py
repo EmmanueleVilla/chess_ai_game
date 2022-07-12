@@ -1,6 +1,6 @@
 from moves_single import get_moves_queen
 from piece import Piece
-from tests.base import assert_same_array
+from tests.base import assert_same_move
 
 
 def test_queen_free():
@@ -10,7 +10,7 @@ def test_queen_free():
     expected = [
         "Qd5", "Qe6", "Qf7", "Qg8", "Qd3", "Qe2", "Qf1", "Qb5", "Qa6", "Qb3", "Qa2", "Qa4", "Qb4", "Qd4", "Qe4",
         "Qf4", "Qg4", "Qh4", "Qc1", "Qc2", "Qc3", "Qc5", "Qc6", "Qc7", "Qc8"]
-    assert_same_array(expected, result)
+    assert_same_move(expected, result)
 
 
 def test_queen_friendly():
@@ -21,7 +21,7 @@ def test_queen_friendly():
     expected = [
         "Qd5", "Qd3", "Qe2", "Qf1", "Qb5", "Qa6", "Qb3", "Qa2", "Qa4", "Qb4", "Qd4", "Qe4",
         "Qf4", "Qg4", "Qh4", "Qc1", "Qc2", "Qc3", "Qc5", "Qc6", "Qc7", "Qc8"]
-    assert_same_array(expected, result)
+    assert_same_move(expected, result)
 
 
 def test_queen_enemy():
@@ -32,4 +32,4 @@ def test_queen_enemy():
     expected = [
         "Qd5", "Qxe6", "Qd3", "Qe2", "Qf1", "Qb5", "Qa6", "Qb3", "Qa2", "Qa4", "Qb4", "Qd4", "Qe4",
         "Qf4", "Qg4", "Qh4", "Qc1", "Qc2", "Qc3", "Qc5", "Qc6", "Qc7", "Qc8"]
-    assert_same_array(expected, result)
+    assert_same_move(expected, result)
