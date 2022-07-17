@@ -12,7 +12,7 @@
 * Draw after 50 turns without captures or pawn moving
 * Draw after 250 turns
 ### Log
-* Save match.log with the moves with additional info if a move was invalid
+* Save match log with the moves with additional info if a move was invalid
 * Save tournament log with the results of every match
 ### Refactor
 * Add types to methods
