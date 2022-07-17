@@ -1,5 +1,6 @@
 ### Moves
 * Add en passant capture
+* Add pawn promotion
 * Add castling
 * Add + or # at the end of the move based on the enemy king state
 * Remove invalid moves (where owned king is in check afterwards)
