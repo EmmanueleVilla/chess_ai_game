@@ -1,9 +1,7 @@
 from functools import reduce
 
-from move import Move
 from moves_applier import apply_move
 from moves_single import get_moves
-from utils import print_board
 
 
 def get_all_moves(board_size, pieces, color):
@@ -26,23 +24,30 @@ def fix_ambiguities(pieces, full):
 
 def fix_check_info(board_size, color, applied_moves):
     """Adds a + at the end of the moves that cause a check to the opponent
+        or a # if it's a checkmate
         and removes the moves that cause a check to me"""
+    result = []
     enemy_color = "B" if color == "W" else "W"
-    # Remove applied moves where my king is in check
-    applied_moves = [enhance_move_if_king_is_in_check(board_size, move, applied_moves, enemy_color) for move in
-                     applied_moves
-                     if not will_my_king_be_in_check(board_size, move[1], color)]
-    return [move for move in applied_moves]
+    for move in applied_moves:
+        # Skip if my king is in check
+        if is_king_in_check(board_size, move[1], color):
+            continue
+        if is_king_in_check(board_size, move[1], enemy_color):
+            king = [piece for piece in move[1] if piece.color == enemy_color and piece.name == "K"]
+            king_moves = get_moves(board_size, king, move[1])
+            if len(king_moves) == 0:
+                # checkmate -> add #
+                result.append(move[1])
+            else:
+                # check -> add +
+                result.append(move[1])
+        else:
+            result.append(move[1])
+    return applied_moves
 
 
-def enhance_move_if_king_is_in_check(board_size: int, move: Move, applied_moves, color: str):
-    """Adds information about checking the king with the given color"""
-    return move
-
-
-def will_my_king_be_in_check(board_size, pieces, color):
+def is_king_in_check(board_size, pieces, color):
     """Returns true if on this board the king of the given color is in check"""
-    print_board(board_size, pieces)
     full = [get_moves(board_size, piece, pieces) for piece in pieces if piece.color != color]
     if len(full) > 0:
         full = reduce(lambda x, y: x + y, full)
