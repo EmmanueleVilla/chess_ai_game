@@ -1,6 +1,7 @@
 from functools import reduce
 from typing import List, Tuple
 
+from check import Check
 from color import Color
 from move import Move
 from moves_applier import apply_move
@@ -41,13 +42,13 @@ def fix_check_info(board_size: int, color: Color, applied_moves: List[Tuple[Move
             king_moves = get_moves(board_size, king[0], move[1])
             if len(king_moves) == 0:
                 # checkmate -> add #
-                result.append(move[1])
+                result.append(move[0].copy(Check.CHECKMATE))
             else:
                 # check -> add +
-                result.append(move[1])
+                result.append(move[0].copy(Check.CHECK))
         else:
-            result.append(move[1])
-    return [move[0] for move in applied_moves]
+            result.append(move[0])
+    return result
 
 
 def is_king_in_check(board_size: int, pieces: List[Piece], color: Color) -> bool:
