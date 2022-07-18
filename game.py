@@ -62,10 +62,7 @@ def play(board_size: int, args: List[str], game_id: int, base_path: str) -> None
 def play_turn(board_size: int, turn_number: int, turn_color: Color, pieces: List[Piece], cmd: str, path: str) \
         -> Tuple[str, List[Piece]]:
     """Asks the AI to return the move to be played"""
-    my_pieces = [piece for piece in pieces if piece.color == turn_color]
-    moves = get_all_moves(board_size, my_pieces, turn_color)
-    print(jsonpickle.encode([f'{p}' for p in my_pieces]))
-    print(jsonpickle.encode([m.to_an() for m in moves]))
+    moves = get_all_moves(board_size, pieces, turn_color)
     state = GameState(board_size, turn_number, turn_color, pieces, moves)
     encoded = jsonpickle.encode(state)
     write_message(path, encoded)
