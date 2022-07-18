@@ -34,4 +34,4 @@ def board_to_string(board_size: int, pieces: List[Piece]) -> str:
             result += output
         result += "\n"
     result += gray + "   [a][b][c][d][e][f][g][h]" + white
-    return result
+    return result + "\n"

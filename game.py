@@ -1,14 +1,13 @@
 import os.path
 import subprocess
-from typing import List
+from typing import List, Tuple
 
-import jsonpickle  # type: ignore
 import jsonpickle  # type: ignore
 
 from board import build_pieces
 from color import Color
 from game_state import GameState
-from log import get_session_id, init_files, write_board, write_message, message_filename
+from log import get_session_id, init_files, write_board, write_message, MESSAGE_FILENAME, write_an
 from move import Move
 from moves_applier import apply_move
 from moves_global import get_all_moves
@@ -29,28 +28,44 @@ def play(board_size: int, args: List[str], game_id: int, base_path: str) -> None
     pieces = build_pieces(board_size)
     path = os.path.join(base_path, f'{game_id}')
     init_files(path)
-    while True:
-        board = board_to_string(board_size, pieces)
-        print(board)
-        write_board(path, board)
+
+    board = board_to_string(board_size, pieces)
+    print(board)
+    write_board(path, board)
+
+    while turn_number < 50:
+        an_log = f'{turn_number}. '
         turn_color = Color.WHITE
-        pieces = play_turn(board_size, turn_number, turn_color, pieces, args[0],
-                           path + "/" + message_filename)
+        result = play_turn(board_size, turn_number, turn_color, pieces, args[0],
+                           path + "/" + MESSAGE_FILENAME)
+        pieces = result[1]
+
+        an_log += result[0]
         board = board_to_string(board_size, pieces)
         print(board)
         write_board(path, board)
-        # print_board(board_size, pieces)
-        # turn_color = Color.BLACK
-        # pieces = play_turn(board_size, turn_number, turn_color, pieces, args[0])
+
+        turn_color = Color.BLACK
+        result = play_turn(board_size, turn_number, turn_color, pieces, args[0],
+                           path + "/" + MESSAGE_FILENAME)
+        pieces = result[1]
+
+        an_log += f' {result[0]}\n'
+        write_an(path, an_log)
+        board = board_to_string(board_size, pieces)
+        print(board)
+        write_board(path, board)
+
         turn_number += 1
-        break
 
 
 def play_turn(board_size: int, turn_number: int, turn_color: Color, pieces: List[Piece], cmd: str, path: str) \
-        -> List[Piece]:
+        -> Tuple[str, List[Piece]]:
     """Asks the AI to return the move to be played"""
     my_pieces = [piece for piece in pieces if piece.color == turn_color]
     moves = get_all_moves(board_size, my_pieces, turn_color)
+    print(jsonpickle.encode([f'{p}' for p in my_pieces]))
+    print(jsonpickle.encode([m.to_an() for m in moves]))
     state = GameState(board_size, turn_number, turn_color, pieces, moves)
     encoded = jsonpickle.encode(state)
     write_message(path, encoded)
@@ -64,13 +79,13 @@ def play_turn(board_size: int, turn_number: int, turn_color: Color, pieces: List
         if process.stdout is not None:
             for line in process.stdout:
                 return process_move(pieces, line.replace("\n", ""), moves)
-        return pieces
+        return "None", pieces
 
 
-def process_move(pieces: List[Piece], move: str, moves: List[Move]) -> List[Piece]:
+def process_move(pieces: List[Piece], move: str, moves: List[Move]) -> Tuple[str, List[Piece]]:
     """Process the move returned by the AI"""
     move_detail = [m for m in moves if m.to_an() == move]
     if len(move_detail) == 0:
         # Todo: Handle move not defined
-        return pieces
-    return apply_move(pieces, move_detail[0])
+        return "Invalid Move", pieces
+    return move, apply_move(pieces, move_detail[0])

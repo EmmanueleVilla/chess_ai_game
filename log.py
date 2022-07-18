@@ -1,9 +1,9 @@
 import os
 from datetime import datetime
 
-an_filename = "/an.txt"
-board_filename = "/board.txt"
-message_filename = "/message.txt"
+AN_FILENAME = "/an.txt"
+BOARD_FILENAME = "/board.txt"
+MESSAGE_FILENAME = "/message.txt"
 
 
 def get_session_id() -> str:
@@ -18,30 +18,27 @@ def get_session_id() -> str:
 def init_files(path: str) -> None:
     """Initialize the log files at the given path"""
     os.makedirs(path)
-    logs_an = open(path + an_filename, "x")
-    logs_an.close()
-    logs_board = open(path + board_filename, "x")
-    logs_board.close()
-    message_game = open(path + message_filename, "x")
-    message_game.close()
+    with open(path + AN_FILENAME, "x", encoding="utf-8") as logs_an:
+        logs_an.close()
+    with open(path + BOARD_FILENAME, "x", encoding="utf-8") as logs_board:
+        logs_board.close()
+    with open(path + MESSAGE_FILENAME, "x", encoding="utf-8") as message_game:
+        message_game.close()
 
 
 def write_board(path: str, board: str) -> None:
     """Appends the board to the given file"""
-    logs_board = open(path + board_filename, "a")
-    logs_board.write(board)
-    logs_board.close()
+    with open(path + BOARD_FILENAME, "a", encoding="utf-8") as logs_board:
+        logs_board.write(board)
 
 
 def write_an(path: str, turn: str) -> None:
-    """Appends the an_log to the given file"""
-    logs_an = open(path + an_filename, "a")
-    logs_an.write(turn)
-    logs_an.close()
+    """Appends the an_log to the given file on the same line"""
+    with open(path + AN_FILENAME, "a", encoding="utf-8") as logs_an:
+        logs_an.write(turn)
 
 
 def write_message(path: str, message: str) -> None:
     """Replace the message in the given file"""
-    message_game = open(path, "w")
-    message_game.write(message)
-    message_game.close()
+    with open(path, "w", encoding="utf-8") as message_game:
+        message_game.write(message)
