@@ -5,7 +5,7 @@ from piece import to_letter
 class Move:
     """Represents a move on the board"""
 
-    def __init__(self, piece, i, j, is_capture, is_check: False):
+    def __init__(self, piece, i, j, is_capture, is_check=False):
         self.piece = piece
         self.coord = Coord(i, j)
         self.is_capture = is_capture
