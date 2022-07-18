@@ -4,6 +4,7 @@ from tests.base import assert_same_move
 
 
 def test_get_all_moves_base():
+    """Checks the full moves of a board with a single pawn"""
     piece = Piece("W", "P", 1, 2, True)
     result = get_all_moves(8, [piece], "W")
     expected = ["a3"]
