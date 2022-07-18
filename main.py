@@ -1,6 +1,6 @@
 import sys
 
-from game import play
+from game import start_game
 
 
 def print_help() -> None:
@@ -15,7 +15,7 @@ def main() -> None:
     if (args[0] == "-h") or (args[0] == "--help"):
         print_help()
     else:
-        play(8, args)
+        start_game(args)
 
 
 main()

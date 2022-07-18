@@ -7,6 +7,12 @@ from piece import Piece
 
 def print_board(board_size: int, pieces: List[Piece]) -> None:
     """Prints the board"""
+    print(board_to_string(board_size, pieces))
+
+
+def board_to_string(board_size: int, pieces: List[Piece]) -> str:
+    """Returns a string representation of the board"""
+    result: str = ""
     gray = '\033[90m'
     white = '\033[0m'
     color_map = {
@@ -14,7 +20,7 @@ def print_board(board_size: int, pieces: List[Piece]) -> None:
         Color.WHITE: '\033[92m'
     }
     for j in reversed(range(1, board_size + 1)):
-        print(f'{gray}[{j}]{white}', end="")
+        result += f'{gray}[{j}]{white}'
         for i in range(1, board_size + 1):
             piece = search_by_indexes(pieces, i, j)
             output = "["
@@ -25,6 +31,7 @@ def print_board(board_size: int, pieces: List[Piece]) -> None:
             else:
                 output += " "
             output += "]"
-            print(output, end="")
-        print("")
-    print(gray + "   [a][b][c][d][e][f][g][h]" + white)
+            result += output
+        result += "\n"
+    result += gray + "   [a][b][c][d][e][f][g][h]" + white
+    return result
