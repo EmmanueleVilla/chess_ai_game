@@ -25,11 +25,7 @@ For example, to use the default AI:
 python3 main.py "python3 AI/stupid_ai.py" "python3 AI/stupid_ai.py"
 ```
 
-The output will be the board:
 
-![Board](/images/preview.png "The board")
-
-The AI executable will receive the state of the board via args, must print to the console the move and then exit(0). The
-communication interface is yet to be determined.
+The AI executable will receive the path of a json containing the state of the board and the possible moves via args, it must print to the console the move and then exit(0).
 
 During play, a log file with all the moves will be saved for training.
