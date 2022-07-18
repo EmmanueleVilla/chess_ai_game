@@ -1,4 +1,5 @@
 from board import search_by_indexes
+from color import Color
 
 
 def print_board(board_size, pieces):
@@ -6,8 +7,8 @@ def print_board(board_size, pieces):
     gray = '\033[90m'
     white = '\033[0m'
     color_map = {
-        'B': '\033[94m',
-        'W': '\033[92m'
+        Color.BLACK: '\033[94m',
+        Color.WHITE: '\033[92m'
     }
     for j in reversed(range(1, board_size + 1)):
         print(f'{gray}[{j}]{white}', end="")

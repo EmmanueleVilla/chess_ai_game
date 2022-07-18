@@ -1,11 +1,11 @@
 from coord import Coord
-from piece import to_letter
+from piece import to_letter, Piece
 
 
 class Move:
     """Represents a move on the board"""
 
-    def __init__(self, piece, i, j, is_capture, is_check=False):
+    def __init__(self, piece: Piece, i: int, j: int, is_capture: bool, is_check: bool = False):
         self.piece = piece
         self.coord = Coord(i, j)
         self.is_capture = is_capture
