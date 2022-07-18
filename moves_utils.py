@@ -6,10 +6,11 @@ from piece import Piece
 
 
 def get_moves_with_direction(board_size: int, piece: Piece, pieces: List[Piece], delta_i: int, delta_j: int,
-                             stop_on_count: int, stop_on_enemy=False, only_on_enemy=False):
+                             stop_on_count: int, stop_on_enemy: bool = False, only_on_enemy: bool = False) \
+        -> List[Move]:
     """Calculate the possible moves in the given direction,
     moving by the given delta and stopping at the given conditions."""
-    output = []
+    output: List[Move] = []
     i = piece.i()
     j = piece.j()
     for _ in range(stop_on_count):

@@ -4,7 +4,7 @@ from move import Move
 from piece import Piece
 
 
-def apply_move(pieces: List[Piece], move: Move):
+def apply_move(pieces: List[Piece], move: Move) -> List[Piece]:
     """Applies the given move to the pieces and returns the new configuration"""
     remove = [move.piece.coord, move.coord]
     add = Piece(move.piece.color, move.piece.name, move.coord.i, move.coord.j, True)

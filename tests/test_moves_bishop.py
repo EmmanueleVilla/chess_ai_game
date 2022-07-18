@@ -4,7 +4,7 @@ from piece import Piece
 from tests.base import assert_same_move
 
 
-def test_bishop_free():
+def test_bishop_free() -> None:
     """Tests the available rules of a bishop with full free space"""
     piece = Piece(Color.WHITE, "B", 3, 4, False)
     result = get_moves_bishop(8, piece, [piece])
@@ -12,7 +12,7 @@ def test_bishop_free():
     assert_same_move(expected, result)
 
 
-def test_bishop_friendly():
+def test_bishop_friendly() -> None:
     """Tests the available rules of a bishop with a friendly pawn that stops it"""
     piece = Piece(Color.WHITE, "B", 3, 4, False)
     friend = Piece(Color.WHITE, "P", 5, 6, False)
@@ -21,7 +21,7 @@ def test_bishop_friendly():
     assert_same_move(expected, result)
 
 
-def test_bishop_enemy():
+def test_bishop_enemy() -> None:
     """Tests the available rules of a bishop with an enemy pawn that stops it"""
     piece = Piece(Color.WHITE, "B", 3, 4, False)
     enemy = Piece(Color.BLACK, "P", 5, 6, False)

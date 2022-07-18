@@ -4,7 +4,7 @@ from piece import Piece
 from tests.base import assert_same_move
 
 
-def test_get_all_moves_base():
+def test_get_all_moves_base() -> None:
     """Checks the full moves of a board with a single pawn"""
     piece = Piece(Color.WHITE, "P", 1, 2, True)
     result = get_all_moves(8, [piece], Color.WHITE)
@@ -12,7 +12,7 @@ def test_get_all_moves_base():
     assert_same_move(expected, result)
 
 
-def test_get_all_moves_to_check():
+def test_get_all_moves_to_check() -> None:
     """Checks that the moves that put the enemy king in check finish with the + sign"""
     piece = Piece(Color.WHITE, "P", 1, 2, True)
     enemy = Piece(Color.BLACK, "K", 2, 4, True)
@@ -21,7 +21,7 @@ def test_get_all_moves_to_check():
     assert_same_move(expected, result)
 
 
-def test_get_all_moves_causing_check():
+def test_get_all_moves_causing_check() -> None:
     """Checks that the moves that put my king into check are removed from the list"""
     piece = Piece(Color.WHITE, "P", 2, 2, True)
     ally = Piece(Color.WHITE, "K", 1, 2, True)

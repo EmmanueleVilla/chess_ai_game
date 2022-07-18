@@ -4,7 +4,7 @@ from piece import Piece
 from tests.base import assert_same_move
 
 
-def test_rook_free():
+def test_rook_free() -> None:
     """Tests the available rules of a rook with full free space"""
     piece = Piece(Color.WHITE, "R", 4, 6, False)
     result = get_moves_rook(8, piece, [piece])
@@ -12,7 +12,7 @@ def test_rook_free():
     assert_same_move(expected, result)
 
 
-def test_rook_friendly():
+def test_rook_friendly() -> None:
     """Tests the available rules of a rook with a friendly pawn that stops it"""
     piece = Piece(Color.WHITE, "R", 4, 6, False)
     friend = Piece(Color.WHITE, "P", 2, 6, False)
@@ -21,7 +21,7 @@ def test_rook_friendly():
     assert_same_move(expected, result)
 
 
-def test_rook_enemy():
+def test_rook_enemy() -> None:
     """Tests the available rules of a rook with an enemy pawn that stops it"""
     piece = Piece(Color.WHITE, "R", 4, 6, False)
     enemy = Piece(Color.BLACK, "P", 2, 6, False)

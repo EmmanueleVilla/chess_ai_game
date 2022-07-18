@@ -5,7 +5,7 @@ from piece import Piece
 from tests.base import assert_same_pieces
 
 
-def test_move_with_catch():
+def test_move_with_catch() -> None:
     """Tests the board update after a catch move"""
     pieces = [
         Piece(Color.WHITE, "A", 0, 0, False),

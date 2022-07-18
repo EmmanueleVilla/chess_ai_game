@@ -1,8 +1,11 @@
+from typing import List
+
 from board import search_by_indexes
 from color import Color
+from piece import Piece
 
 
-def print_board(board_size, pieces):
+def print_board(board_size: int, pieces: List[Piece]) -> None:
     """Prints the board"""
     gray = '\033[90m'
     white = '\033[0m'

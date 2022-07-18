@@ -4,7 +4,7 @@ from piece import Piece
 from tests.base import assert_same_move
 
 
-def test_king_free():
+def test_king_free() -> None:
     """Tests the available rules of a king with full free space"""
     piece = Piece(Color.WHITE, "K", 3, 4, False)
     result = get_moves_king(8, piece, [piece])
@@ -12,7 +12,7 @@ def test_king_free():
     assert_same_move(expected, result)
 
 
-def test_king_friendly():
+def test_king_friendly() -> None:
     """Tests the available rules of a king with a friendly pawn that stops it"""
     piece = Piece(Color.WHITE, "K", 3, 4, False)
     friend = Piece(Color.WHITE, "P", 4, 5, False)
@@ -21,7 +21,7 @@ def test_king_friendly():
     assert_same_move(expected, result)
 
 
-def test_king_enemy():
+def test_king_enemy() -> None:
     """Tests the available rules of a king with an enemy pawn that stops it"""
     piece = Piece(Color.WHITE, "K", 3, 4, False)
     enemy = Piece(Color.BLACK, "P", 4, 5, False)

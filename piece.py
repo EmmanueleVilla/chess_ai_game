@@ -1,7 +1,10 @@
+from typing import Any
+
+from color import Color
 from coord import Coord
 
 
-def to_letter(coordinate):
+def to_letter(coordinate: int) -> str:
     """Returns the i coordinate as a letter"""
     assert 0 < coordinate < 9
     letters = "a b c d e f g h".split(" ")
@@ -11,21 +14,21 @@ def to_letter(coordinate):
 class Piece:
     """Represents a piece on the board"""
 
-    def i(self):
+    def i(self) -> int:
         """Returns the i coordinate"""
         return self.coord.i
 
-    def j(self):
+    def j(self) -> int:
         """Returns the j coordinate"""
         return self.coord.j
 
-    def __init__(self, color, name, i, j, moved=False):
+    def __init__(self, color: Color, name: str, i: int, j: int, moved: bool = False):
         self.color = color
         self.name = name
         self.coord = Coord(i, j)
         self.moved = moved
 
-    def __eq__(self, obj):
+    def __eq__(self, obj: Any) -> bool:
         return (
                 isinstance(obj, Piece)
                 and obj.coord == self.coord
@@ -33,5 +36,5 @@ class Piece:
                 and obj.name == self.name
         )
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f'{self.name}{self.color}: {to_letter(self.i())}{self.j()}'

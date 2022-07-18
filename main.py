@@ -3,12 +3,12 @@ import sys
 from game import play
 
 
-def print_help():
+def print_help() -> None:
     """Prints the usage of this main"""
     print("Usage: main.py {first_ia_path} {second_ia_path}")
 
 
-def main():
+def main() -> None:
     """Main function"""
     args = sys.argv[1:]
 

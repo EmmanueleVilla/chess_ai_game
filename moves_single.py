@@ -25,13 +25,13 @@ def get_moves_pawn(board_size: int, piece: Piece, pieces: List[Piece]) -> List[M
     """Returns the available moves of the given pawn in the given board"""
     direction = -1 if piece.color == Color.BLACK else 1
 
-    forward = get_moves_with_direction(board_size, piece, pieces, 0, direction, 1 if piece.moved else 2,
-                                       stop_on_enemy=True)
-    right = get_moves_with_direction(board_size, piece, pieces, 1, direction, 1,
-                                     only_on_enemy=True)
-    left = get_moves_with_direction(board_size, piece, pieces, -1,
-                                    direction, 1,
-                                    only_on_enemy=True)
+    forward: List[Move] = get_moves_with_direction(board_size, piece, pieces, 0, direction, 1 if piece.moved else 2,
+                                                   stop_on_enemy=True)
+    right: List[Move] = get_moves_with_direction(board_size, piece, pieces, 1, direction, 1,
+                                                 only_on_enemy=True)
+    left: List[Move] = get_moves_with_direction(board_size, piece, pieces, -1,
+                                                direction, 1,
+                                                only_on_enemy=True)
     # Todo: add en-passant capture
     # Todo: add promotion
     return forward + right + left

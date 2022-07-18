@@ -1,9 +1,11 @@
+from typing import List
+
 from board import build_pieces, search_by_indexes
 from color import Color
 from piece import Piece
 
 
-def test_build_pieces():
+def test_build_pieces() -> None:
     """Tests the board pieces creation"""
     pieces = build_pieces(8)
     assert pieces[0] == Piece(Color.WHITE, "R", 1, 1)
@@ -40,19 +42,19 @@ def test_build_pieces():
     assert pieces[31] == Piece(Color.BLACK, "R", 8, 8)
 
 
-def test_search_by_indexes_match():
+def test_search_by_indexes_match() -> None:
     """Tests the search by indexes finding something"""
-    pieces = [Piece("", "", 0, 0)]
+    pieces = [Piece(Color.BLACK, "", 0, 0)]
     assert search_by_indexes(pieces, 0, 0) == pieces[0]
 
 
-def test_search_by_indexes_empty_pieces():
+def test_search_by_indexes_empty_pieces() -> None:
     """Tests the search by indexes finding nothing because array is empty"""
-    pieces = []
+    pieces: List[Piece] = []
     assert search_by_indexes(pieces, 0, 0) is None
 
 
-def test_search_by_indexes_not_match():
+def test_search_by_indexes_not_match() -> None:
     """Tests the search by indexes finding nothing because no matches are present"""
-    pieces = [Piece("", "", 0, 0)]
+    pieces = [Piece(Color.BLACK, "", 0, 0)]
     assert search_by_indexes(pieces, 0, 1) is None

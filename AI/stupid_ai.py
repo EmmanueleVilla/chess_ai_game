@@ -1,7 +1,7 @@
 import sys
 
 
-def main():
+def main() -> None:
     """Main method"""
     args = sys.argv[1:]
     print(args[0])

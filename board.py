@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Union
 
 from color import Color
 from piece import Piece
@@ -20,7 +20,7 @@ def build_pieces(board_size: int) -> List[Piece]:
     return output
 
 
-def search_by_indexes(pieces: List[Piece], i: int, j: int):
+def search_by_indexes(pieces: List[Piece], i: int, j: int) -> Union[Piece, None]:
     """Searches for the piece at the given coordinates"""
     for piece in pieces:
         if (piece.i() == i) and (piece.j() == j):

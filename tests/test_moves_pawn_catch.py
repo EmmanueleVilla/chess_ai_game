@@ -5,7 +5,7 @@ from tests.base import assert_same_move
 from utils import print_board
 
 
-def test_pawn_start_catch_right_white():
+def test_pawn_start_catch_right_white() -> None:
     """Tests the available rules of a pawn that can capture an enemy"""
     piece = Piece(Color.WHITE, "P", 1, 2, False)
     enemy = Piece(Color.BLACK, "P", 2, 3, False)
@@ -15,7 +15,7 @@ def test_pawn_start_catch_right_white():
     assert_same_move(expected, result)
 
 
-def test_pawn_start_catch_right_black():
+def test_pawn_start_catch_right_black() -> None:
     """Tests the available rules of a pawn that can capture an enemy"""
     piece = Piece(Color.BLACK, "P", 3, 3, False)
     enemy = Piece(Color.WHITE, "P", 2, 2, False)
@@ -25,7 +25,7 @@ def test_pawn_start_catch_right_black():
     assert_same_move(expected, result)
 
 
-def test_pawn_start_catch_left_black():
+def test_pawn_start_catch_left_black() -> None:
     """Tests the available rules of a pawn that can capture an enemy"""
     piece = Piece(Color.BLACK, "P", 3, 3, False)
     enemy = Piece(Color.WHITE, "P", 4, 2, False)
@@ -35,7 +35,7 @@ def test_pawn_start_catch_left_black():
     assert_same_move(expected, result)
 
 
-def test_pawn_start_catch_left_white():
+def test_pawn_start_catch_left_white() -> None:
     """Tests the available rules of a pawn that can capture an enemy"""
     piece = Piece(Color.WHITE, "P", 2, 1, False)
     enemy = Piece(Color.BLACK, "P", 1, 2, False)

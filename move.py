@@ -1,10 +1,6 @@
-from typing import TypeVar
-
 from check import Check
 from coord import Coord
 from piece import to_letter, Piece
-
-SelfMove = TypeVar("SelfMove", bound="Move")
 
 
 class Move:
@@ -16,7 +12,7 @@ class Move:
         self.is_capture = is_capture
         self.check = check
 
-    def to_an(self):
+    def to_an(self) -> str:
         """Returns the "an" representation of this move"""
         output = self.piece.name if self.piece.name != "P" else ""
         output += to_letter(self.piece.i()) if self.piece.name == "P" and self.is_capture else ""
@@ -27,6 +23,7 @@ class Move:
         output += "#" if self.check == Check.CHECKMATE else ""
         return output
 
-    def copy(self, check: Check = Check.NONE) -> SelfMove:
-        """Copy the given move modifying the check value"""
-        return Move(self.piece, self.coord.i, self.coord.j, self.is_capture, check)
+
+def copy_move(original: Move, check: Check = Check.NONE) -> Move:
+    """Copy the given move modifying the check value"""
+    return Move(original.piece, original.coord.i, original.coord.j, original.is_capture, check)

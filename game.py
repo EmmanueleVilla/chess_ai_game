@@ -11,7 +11,7 @@ from piece import Piece
 from utils import print_board
 
 
-def play(board_size: int, args: List[str]):
+def play(board_size: int, args: List[str]) -> None:
     """Starts the game"""
     turn_number = 0
     pieces = build_pieces(board_size)
@@ -27,7 +27,7 @@ def play(board_size: int, args: List[str]):
         break
 
 
-def play_turn(board_size: int, turn_number: int, turn_color: Color, pieces: List[Piece], cmd: str):
+def play_turn(board_size: int, turn_number: int, turn_color: Color, pieces: List[Piece], cmd: str) -> List[Piece]:
     """Plays the turn with the given executable command"""
     state = GameState(board_size, turn_number, turn_color, pieces)
     with subprocess.Popen(
@@ -37,6 +37,7 @@ def play_turn(board_size: int, turn_number: int, turn_color: Color, pieces: List
             universal_newlines=True,
             shell=True
     ) as process:
-        for line in process.stdout:
-            print(line)
+        if process.stdout is not None:
+            for line in process.stdout:  # mypy: ignore-errors
+                print(line)
     return pieces
