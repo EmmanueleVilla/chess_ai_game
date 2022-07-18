@@ -13,7 +13,7 @@ Yes, I know there are already lots of programs like this and official AI tournam
 
 ## Usage
 
-To play, you'll just need to call
+To play, you just need to call
 
 ```
 python3 main.py "command to execute the first AI" "command to execute the second AI"
