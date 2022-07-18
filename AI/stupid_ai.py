@@ -1,7 +1,7 @@
 import sys
 from random import choice
 
-import jsonpickle
+import jsonpickle  # type: ignore
 
 from game_state import GameState
 
