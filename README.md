@@ -1,36 +1,32 @@
 # Chess AI Game
 
-This is an experiment of a chess game with external configurable artificial intelligence.
+Chess AI Game is an artificial intelligence game written in python where two external artificial intelligence program
+play chess against each other.
 
-It's a work in progress and I'm just learning python, so it sucks :)
+It's still a work in progress, and I'm learning python while doing it, so it may suck :)
 
-## Description
-
-Chess AI Game is a game where you develop your own artificial intelligence to play chess and attach it to the main
-executable to play.
-
-Yes, I know there are already lots of programs like this and official AI tournaments and stuff, this is just an exercise
+Yes, I know there are already lots of programs like this and official chess AI tournaments and stuff, this is just an
+exercise
 
 ## Usage
 
 To play, you need to call
 
 ```
-python3 main.py "command to execute the first AI" "command to execute the second AI" "command to execute the third AI" ...
+python3 main.py "command to execute the first AI" "command to execute the second AI"
 ```
 
-At the moment, only two AI are supported: for example, to use the default AI call:
+In the AI folder there's a simple AI that plays a random move, giving priority to moves that capture, check and
+checkmate the opponent. Given the format above, you can start the game by executing:
 
 ```
 python3 main.py "python3 AI/stupid_ai.py" "python3 AI/stupid_ai.py"
 ```
 
-The AI executable will receive the path of a file containing the state of the board and the possible moves via args, it
-must print to the console the move and then exit(0).
-
-Output example:
+The result is a console log containing the games id and the results of 10 games:
 
 ```
+2022_07_19_17_52_06_129423
 Game 0: 0.5-0.5 (50 Rule)
 Game 1: 0.5-0.5 (50 Rule)
 Game 2: 0-1 (Checkmate)
@@ -43,3 +39,80 @@ Game 8: 0.5-0.5 (Repetition)
 Game 9: 0.5-0.5 (Repetition)
 Results: 5.0-5.0
 ```
+
+## Logs
+
+During play, a folder named logs/{games_id} will be created in the root of the project. This folder contains 10
+sub-folders (one for each game played), containing 3 files:
+
+* an.txt: the log of the game using the [Algebraic Notation](https://en.wikipedia.org/wiki/Algebraic_notation_(chess)).
+  In addition, an explanation of why the match ended is explicited at the end. The explanation can be Checkmate,
+  Stalemate, 50 Rule or Repetition. The game may also end when it reaches the 1000th turn, but it should be impossible
+
+Example:
+
+```
+1. d4 Nf6
+2. e3 Ng4
+3. Qxg4 a6
+4. Qxd7+ Nxd7
+5. Bxa6 bxa6
+6. Kf1 Ra7
+7. h3 Nc5
+8. dxc5 Qd1#
+0-1 (Checkmate)
+```
+
+* board.txt: the log of the game composed by the print of all the boards state. This is a colored log, so you'll want to
+  cat the file in a terminal
+* message.txt: this is the file used for communication between the main game and the AI
+
+## Communication
+
+When the game needs to request a move from a player, it creates a txt file containing the board state, composed like
+this:
+
+```
+board_size
+{board_size}
+turn_number
+{turn_number}
+turn_color
+{turn_color}
+pieces
+{first_piece}
+{second_piece}
+...
+moves
+{first_move}
+{second_move}
+...
+```
+
+For example:
+
+```
+board_size
+8
+turn_number
+101
+turn_color
+Color.WHITE
+pieces
+KW: b1
+KB: d1
+moves
+Kb2
+Ka1
+Ka2
+```
+
+The AI program will receive the path of this file as the first and unique command line arg. It must open the file, parse
+it and respond using a console log, printing the code of the move to be executed.
+
+If the response is not included in the move list sent by the program, that player will skip a turn and an "Invalid Move"
+step will be printed in the logs
+
+## TODO
+
+You can find the list of the missing features in the [TODO.md](TODO.md) file

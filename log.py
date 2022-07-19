@@ -11,6 +11,7 @@ def get_session_id() -> str:
     date = datetime.now()
     session_id = f'{date.year}_{date.month:02d}_{date.day:02d}' \
                  f'_{date.hour:02d}_{date.minute:02d}_{date.second:02d}_{date.microsecond:02d}'
+    print(session_id)
     path = f'logs/{session_id}'
     return path
 
