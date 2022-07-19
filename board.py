@@ -23,6 +23,6 @@ def build_pieces(board_size: int) -> List[Piece]:
 def search_by_indexes(pieces: List[Piece], i: int, j: int) -> Union[Piece, None]:
     """Searches for the piece at the given coordinates"""
     for piece in pieces:
-        if (piece.i() == i) and (piece.j() == j):
+        if (piece.i == i) and (piece.j == j):
             return piece
     return None

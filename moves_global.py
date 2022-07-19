@@ -23,10 +23,10 @@ def fix_ambiguities(full: List[Move]) -> List[Move]:
     """Adds additional information to the moves if some of them are equals"""
     # Todo: Refactor this to avoid modifying the move. Create a new one instead
     for move in full:
-        duplicates = [m for m in full if m.coord == move.coord and m.piece.name == move.piece.name]
+        duplicates = [m for m in full if m.piece.name == move.piece.name and m.i == move.i and m.j == move.j]
         if len(duplicates) > 1:
-            same_i = all(x.piece.i() == duplicates[0].piece.i() for x in duplicates)
-            same_j = all(x.piece.j() == duplicates[0].piece.j() for x in duplicates)
+            same_i = all(x.piece.i == duplicates[0].piece.i for x in duplicates)
+            same_j = all(x.piece.j == duplicates[0].piece.j for x in duplicates)
             for duplicate in duplicates:
                 duplicate.set_print_i(len(duplicates) > 2 or not same_i or (same_i and same_j))
                 duplicate.set_print_j(len(duplicates) > 2 or same_i)
@@ -63,5 +63,5 @@ def is_king_in_check(board_size: int, pieces: List[Piece], color: Color) -> bool
                               [get_moves(board_size, piece, pieces) for piece in pieces if piece.color != color], [])
     my_king: List[Piece] = [piece for piece in pieces if piece.color == color and piece.name == "K"]
     if len(my_king) == 1:
-        return len([move for move in full if move.coord == my_king[0].coord]) > 0
+        return len([move for move in full if move.i == my_king[0].i and move.j == my_king[0].j]) > 0
     return False

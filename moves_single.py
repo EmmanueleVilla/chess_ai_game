@@ -34,7 +34,7 @@ def get_moves_pawn(board_size: int, piece: Piece, pieces: List[Piece]) -> List[M
                                                 only_on_enemy=True)
     result: List[Move] = []
     for move in forward + right + left:
-        if (piece.color == Color.WHITE and move.coord.j == 8) or (piece.color == Color.BLACK and move.coord.j == 1):
+        if (piece.color == Color.WHITE and move.j == 8) or (piece.color == Color.BLACK and move.j == 1):
             result.append(copy_move_edit_promotion(move, "Q"))
             result.append(copy_move_edit_promotion(move, "N"))
             result.append(copy_move_edit_promotion(move, "R"))
@@ -73,6 +73,8 @@ def get_moves_queen(board_size: int, piece: Piece, pieces: List[Piece]) -> List[
 def get_moves_king(board_size: int, piece: Piece, pieces: List[Piece]) -> List[Move]:
     """Returns the available moves of the given king in the given board"""
     deltas = [(0, 1), (0, -1), (1, 0), (-1, 0), (1, 1), (1, -1), (-1, 1), (-1, -1)]
+    # if not piece.moved:
+    #    available_rooks = [rook for rook in pieces if rook.name == "R" and not rook.moved]
     # Todo: Add castling
     return get_moves_from_deltas_with_max_distance(board_size, piece, pieces, deltas, 1)
 

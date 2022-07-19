@@ -11,8 +11,8 @@ def get_moves_with_direction(board_size: int, piece: Piece, pieces: List[Piece],
     """Calculate the possible moves in the given direction,
     moving by the given delta and stopping at the given conditions."""
     output: List[Move] = []
-    i = piece.i()
-    j = piece.j()
+    i = piece.i
+    j = piece.j
     for _ in range(stop_on_count):
         i += delta_i
         j += delta_j
