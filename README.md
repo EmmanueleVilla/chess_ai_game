@@ -108,9 +108,11 @@ Ka2
 ```
 
 The AI program will receive the path of this file as the first and unique command line arg. It must open the file, parse
-it and respond using a console log, printing the code of the move to be executed.
+it and respond using a console log, printing the code of the move to be executed and then interrupt itself with an exit
+call.
 
-If the response is not included in the move list sent by the program, that player will skip a turn and an "Invalid Move"
+If the response is not included in the move list sent by the program, that player will skip the turn and an "Invalid
+Move"
 step will be printed in the logs
 
 ## TODO
@@ -127,3 +129,11 @@ step will be printed in the logs
 #### Tests
 
 * Add unit tests that re-play the games in the /games/ folder and fails if a move is illegal
+
+### Performance
+
+* Profile and optimize the speed execution
+
+### Next steps
+
+* Use a socket system instead of opening child processes
