@@ -3,8 +3,6 @@ import os.path
 import subprocess
 from typing import List, Tuple, Union
 
-import jsonpickle  # type: ignore
-
 from board import build_pieces
 from color import Color
 from game_result import GameResult
@@ -67,7 +65,7 @@ def play(board_size: int, args: List[str], game_id: int, base_path: str) -> Game
             fifty_rule_count = 0
 
         turn_color = Color.BLACK
-        result = play_turn(board_size, turn_number, turn_color, pieces, args[0],
+        result = play_turn(board_size, turn_number, turn_color, pieces, args[1],
                            path + "/" + MESSAGE_FILENAME)
         pieces = result[1]
         an_log += f' {result[0]}\n'
@@ -115,7 +113,7 @@ def check_end_turn(board_count: int, fifty_rule_count: int, move: str, color: Co
 
 def encode_game_state(state: GameState) -> str:
     """Encodes the game state"""
-    return jsonpickle.encode(state)
+    return str(state)
 
 
 def play_turn(board_size: int, turn_number: int, turn_color: Color, pieces: List[Piece], cmd: str, path: str) \
@@ -142,7 +140,7 @@ def play_turn(board_size: int, turn_number: int, turn_color: Color, pieces: List
 
 def process_move(pieces: List[Piece], move: str, moves: List[Move]) -> Tuple[str, List[Piece]]:
     """Process the move returned by the AI"""
-    move_detail = [m for m in moves if m.to_an() == move]
+    move_detail = [m for m in moves if m.an_string == move]
     if len(move_detail) == 0:
-        return "Invalid Move", pieces
+        return f'Invalid Move {move}', pieces
     return move, apply_move(pieces, move_detail[0])

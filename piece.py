@@ -37,4 +37,4 @@ class Piece:
         )
 
     def __str__(self) -> str:
-        return f'{self.name}{self.color}: {to_letter(self.i())}{self.j()}'
+        return f'{self.name}{"B" if self.color == Color.BLACK else "W"}: {to_letter(self.i())}{self.j()}'

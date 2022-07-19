@@ -28,8 +28,8 @@ def fix_ambiguities(full: List[Move]) -> List[Move]:
             same_i = all(x.piece.i() == duplicates[0].piece.i() for x in duplicates)
             same_j = all(x.piece.j() == duplicates[0].piece.j() for x in duplicates)
             for duplicate in duplicates:
-                duplicate.print_i = len(duplicates) > 2 or not same_i or (same_i and same_j)
-                duplicate.print_j = len(duplicates) > 2 or same_i
+                duplicate.set_print_i(len(duplicates) > 2 or not same_i or (same_i and same_j))
+                duplicate.set_print_j(len(duplicates) > 2 or same_i)
     return full
 
 

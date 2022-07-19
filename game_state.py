@@ -14,3 +14,20 @@ class GameState:
         self.turn_color = turn_color
         self.pieces = pieces
         self.moves = moves
+
+    def __str__(self) -> str:
+        """output format"""
+        output = ""
+        output += "board_size\n"
+        output += f'{self.board_size}\n'
+        output += "turn_number\n"
+        output += f'{self.turn_number}\n'
+        output += "turn_color\n"
+        output += f'{self.turn_color}\n'
+        output += "pieces\n"
+        for piece in self.pieces:
+            output += f'{piece.__str__()}\n'
+        output += "moves\n"
+        for move in self.moves:
+            output += f'{move.an_string}\n'
+        return output

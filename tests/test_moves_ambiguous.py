@@ -11,8 +11,8 @@ def test_ambiguous_move_same_i() -> None:
     ]
 
     result = get_all_moves(8, pieces, Color.WHITE)
-    assert "Rde8" in [move.to_an() for move in result]
-    assert "Rhe8" in [move.to_an() for move in result]
+    assert "Rde8" in [move.an_string for move in result]
+    assert "Rhe8" in [move.an_string for move in result]
 
 
 def test_ambiguous_move_same_j() -> None:
@@ -23,8 +23,8 @@ def test_ambiguous_move_same_j() -> None:
     ]
 
     result = get_all_moves(8, pieces, Color.WHITE)
-    assert "R1a2" in [move.to_an() for move in result]
-    assert "R5a2" in [move.to_an() for move in result]
+    assert "R1a2" in [move.an_string for move in result]
+    assert "R5a2" in [move.an_string for move in result]
 
 
 def test_ambiguous_move_same_i_j() -> None:
@@ -36,7 +36,7 @@ def test_ambiguous_move_same_i_j() -> None:
     ]
 
     result = get_all_moves(8, pieces, Color.WHITE)
-    ans = [move.to_an() for move in result]
+    ans = [move.an_string for move in result]
     assert "Qh4e1" in ans
     assert "Qh1e1" in ans
     assert "Qe4e1" in ans

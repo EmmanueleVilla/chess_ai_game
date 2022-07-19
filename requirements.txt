@@ -1,4 +1,3 @@
 pytest
 pylint
-jsonpickle
 mypy

@@ -7,3 +7,4 @@ max-args = 10
 max-line-length=120
 max-statements=75
 max-locals=20
+max-attributes=10

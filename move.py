@@ -14,8 +14,19 @@ class Move:
         self.print_i = False
         self.print_j = False
         self.promotion = promotion
+        self.an_string = self.__to_an()
 
-    def to_an(self) -> str:
+    def set_print_i(self, print_i: bool) -> None:
+        """Set the print i value"""
+        self.print_i = print_i
+        self.an_string = self.__to_an()
+
+    def set_print_j(self, print_j: bool) -> None:
+        """Set the print i value"""
+        self.print_j = print_j
+        self.an_string = self.__to_an()
+
+    def __to_an(self) -> str:
         """Returns the "an" representation of this move"""
         output = self.piece.name if self.piece.name != "P" else ""
         output += to_letter(self.piece.i()) if self.print_i or (self.piece.name == "P" and self.is_capture) else ""

@@ -10,28 +10,28 @@ def test_king_in_checkmate() -> None:
 
     # Turn 1
     moves = get_all_moves(8, pieces, Color.WHITE)
-    pieces = apply_move(pieces, [move for move in moves if move.to_an() == "g3"][0])
+    pieces = apply_move(pieces, [move for move in moves if move.an_string == "g3"][0])
 
     moves = get_all_moves(8, pieces, Color.BLACK)
-    pieces = apply_move(pieces, [move for move in moves if move.to_an() == "Nc6"][0])
+    pieces = apply_move(pieces, [move for move in moves if move.an_string == "Nc6"][0])
 
     # Turn 2
     moves = get_all_moves(8, pieces, Color.WHITE)
-    pieces = apply_move(pieces, [move for move in moves if move.to_an() == "h3"][0])
+    pieces = apply_move(pieces, [move for move in moves if move.an_string == "h3"][0])
 
     moves = get_all_moves(8, pieces, Color.BLACK)
-    pieces = apply_move(pieces, [move for move in moves if move.to_an() == "a5"][0])
+    pieces = apply_move(pieces, [move for move in moves if move.an_string == "a5"][0])
 
     # Turn 3
     moves = get_all_moves(8, pieces, Color.WHITE)
-    pieces = apply_move(pieces, [move for move in moves if move.to_an() == "f4"][0])
+    pieces = apply_move(pieces, [move for move in moves if move.an_string == "f4"][0])
 
     moves = get_all_moves(8, pieces, Color.BLACK)
-    pieces = apply_move(pieces, [move for move in moves if move.to_an() == "e6"][0])
+    pieces = apply_move(pieces, [move for move in moves if move.an_string == "e6"][0])
 
     # Turn 4
     moves = get_all_moves(8, pieces, Color.WHITE)
-    pieces = apply_move(pieces, [move for move in moves if move.to_an() == "g4"][0])
+    pieces = apply_move(pieces, [move for move in moves if move.an_string == "g4"][0])
 
     moves = get_all_moves(8, pieces, Color.BLACK)
-    pieces = apply_move(pieces, [move for move in moves if move.to_an() == "Qh4#"][0])
+    pieces = apply_move(pieces, [move for move in moves if move.an_string == "Qh4#"][0])
