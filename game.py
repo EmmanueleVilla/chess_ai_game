@@ -113,6 +113,11 @@ def check_end_turn(board_count: int, fifty_rule_count: int, move: str, color: Co
     return None
 
 
+def encode_game_state(state: GameState) -> str:
+    """Encodes the game state"""
+    return jsonpickle.encode(state)
+
+
 def play_turn(board_size: int, turn_number: int, turn_color: Color, pieces: List[Piece], cmd: str, path: str) \
         -> Tuple[str, List[Piece]]:
     """Asks the AI to return the move to be played"""
@@ -120,7 +125,7 @@ def play_turn(board_size: int, turn_number: int, turn_color: Color, pieces: List
     if len(moves) == 0:
         return "Stalemate", pieces
     state = GameState(board_size, turn_number, turn_color, pieces, moves)
-    encoded = jsonpickle.encode(state)
+    encoded = encode_game_state(state)
     write_message(path, encoded)
     with subprocess.Popen(
             f'{cmd} "{path}"',
