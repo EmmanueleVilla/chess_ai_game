@@ -25,13 +25,14 @@ def start_game(args: List[str]) -> None:
 
 def play(board_size: int, args: List[str], game_id: int, base_path: str) -> None:
     """Starts the game"""
+    print(f'Game {game_id}: ', end="")
+
     turn_number = 1
     pieces = build_pieces(board_size)
     path = os.path.join(base_path, f'{game_id}')
     init_files(path)
 
     board = board_to_string(board_size, pieces)
-    print(board)
     write_board(path, board)
     fifty_rule_count = 0
     repetitions: dict[str, int] = {}
@@ -43,7 +44,6 @@ def play(board_size: int, args: List[str], game_id: int, base_path: str) -> None
         pieces = result[1]
         an_log += result[0]
         board = board_to_string(board_size, pieces)
-        print(board)
         write_board(path, board)
         board_hash = hashlib.md5(board.encode('utf-8')).hexdigest()
         board_count = repetitions.get(board_hash, 0)
@@ -51,17 +51,20 @@ def play(board_size: int, args: List[str], game_id: int, base_path: str) -> None
 
         if board_count + 1 == 3:
             an_log += " 1/2-1/2 (Repetition)"
+            print("1/2-1/2 (Repetition)")
             write_an(path, an_log)
             break
 
         if "#" in result[0]:
             an_log += " 1-0"
             write_an(path, an_log)
+            print("1-0")
             break
 
         if "Stalemate" in result[0]:
             an_log += " 1/2-1/2 (Stalemate)"
             write_an(path, an_log)
+            print("1/2-1/2 (Stalemate)")
             break
 
         if "+" in result[0]:
@@ -73,7 +76,6 @@ def play(board_size: int, args: List[str], game_id: int, base_path: str) -> None
         pieces = result[1]
         an_log += f' {result[0]}\n'
         board = board_to_string(board_size, pieces)
-        print(board)
         write_board(path, board)
 
         board_hash = hashlib.md5(board.encode('utf-8')).hexdigest()
@@ -82,21 +84,25 @@ def play(board_size: int, args: List[str], game_id: int, base_path: str) -> None
 
         if board_count + 1 == 3:
             an_log += " 1/2-1/2 (Repetition)"
+            print("1/2-1/2 (Repetition)")
             write_an(path, an_log)
             break
 
         if "#" in result[0]:
             an_log += " 0-1"
+            print("0-1")
             write_an(path, an_log)
             break
 
         if "Stalemate" in result[0]:
             an_log += " 1/2-1/2 (Stalemate)"
+            print("1/2-1/2 (Stalemate)")
             write_an(path, an_log)
             break
 
         if fifty_rule_count == 50:
             an_log += " 1/2-1/2 (50 rule)"
+            print("1/2-1/2 (50 rule)")
             write_an(path, an_log)
             break
 

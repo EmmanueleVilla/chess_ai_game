@@ -18,8 +18,7 @@ class Move:
     def to_an(self) -> str:
         """Returns the "an" representation of this move"""
         output = self.piece.name if self.piece.name != "P" else ""
-        output += to_letter(self.piece.i()) if self.piece.name == "P" and self.is_capture else ""
-        output += to_letter(self.piece.coord.i) if self.print_i else ""
+        output += to_letter(self.piece.i()) if self.print_i or (self.piece.name == "P" and self.is_capture) else ""
         output += f'{self.piece.coord.j}' if self.print_j else ""
         output += "x" if self.is_capture else ""
         output += to_letter(self.coord.i)
