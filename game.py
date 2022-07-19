@@ -1,12 +1,13 @@
 import hashlib
 import os.path
 import subprocess
-from typing import List, Tuple
+from typing import List, Tuple, Union
 
 import jsonpickle  # type: ignore
 
 from board import build_pieces
 from color import Color
+from game_result import GameResult
 from game_state import GameState
 from log import get_session_id, init_files, write_board, write_message, MESSAGE_FILENAME, write_an
 from move import Move
@@ -19,11 +20,16 @@ from utils import board_to_string
 def start_game(args: List[str]) -> None:
     """Starts 10 games"""
     path = get_session_id()
+    white_points = 0
+    black_points = 0
     for i in range(0, 10):
-        play(8, args, i, path)
+        result = play(8, args, i, path)
+        white_points += result.white
+        black_points += result.black
+    print(f'Results: ${white_points}-${black_points}')
 
 
-def play(board_size: int, args: List[str], game_id: int, base_path: str) -> None:
+def play(board_size: int, args: List[str], game_id: int, base_path: str) -> GameResult:
     """Starts the game"""
     print(f'Game {game_id}: ', end="")
 
@@ -49,23 +55,12 @@ def play(board_size: int, args: List[str], game_id: int, base_path: str) -> None
         board_count = repetitions.get(board_hash, 0)
         repetitions[board_hash] = board_count + 1
 
-        if board_count + 1 == 3:
-            an_log += " 1/2-1/2 (Repetition)"
-            print("1/2-1/2 (Repetition)")
+        end = check_end_turn(board_count, result[0], turn_color)
+        if end is not None:
+            an_log += f'{end.white}-{end.black}'
+            an_log += f' ({end.message})'
             write_an(path, an_log)
-            break
-
-        if "#" in result[0]:
-            an_log += " 1-0"
-            write_an(path, an_log)
-            print("1-0")
-            break
-
-        if "Stalemate" in result[0]:
-            an_log += " 1/2-1/2 (Stalemate)"
-            write_an(path, an_log)
-            print("1/2-1/2 (Stalemate)")
-            break
+            return end
 
         if "+" in result[0]:
             fifty_rule_count = 0
@@ -82,29 +77,12 @@ def play(board_size: int, args: List[str], game_id: int, base_path: str) -> None
         board_count = repetitions.get(board_hash, 0)
         repetitions[board_hash] = board_count + 1
 
-        if board_count + 1 == 3:
-            an_log += " 1/2-1/2 (Repetition)"
-            print("1/2-1/2 (Repetition)")
+        end = check_end_turn(board_count, result[0], turn_color)
+        if end is not None:
+            an_log += f'{end.white}-{end.black}'
+            an_log += f' ({end.message})'
             write_an(path, an_log)
-            break
-
-        if "#" in result[0]:
-            an_log += " 0-1"
-            print("0-1")
-            write_an(path, an_log)
-            break
-
-        if "Stalemate" in result[0]:
-            an_log += " 1/2-1/2 (Stalemate)"
-            print("1/2-1/2 (Stalemate)")
-            write_an(path, an_log)
-            break
-
-        if fifty_rule_count == 50:
-            an_log += " 1/2-1/2 (50 rule)"
-            print("1/2-1/2 (50 rule)")
-            write_an(path, an_log)
-            break
+            return end
 
         if "+" in result[0]:
             fifty_rule_count = 0
@@ -113,6 +91,22 @@ def play(board_size: int, args: List[str], game_id: int, base_path: str) -> None
 
         turn_number += 1
         fifty_rule_count += 1
+
+    return GameResult(0.5, 0.5, "Turns elapsed")
+
+
+def check_end_turn(board_count: int, move: str, color: Color) -> Union[GameResult, None]:
+    """Check if the match is ended"""
+    if board_count == 3:
+        return GameResult(0.5, 0.5, "Repetition")
+
+    if "#" in move:
+        return GameResult(1 if color == Color.WHITE else 0, 0 if color == Color.WHITE else 1, "Checkmate")
+
+    if "Stalemate" in move:
+        return GameResult(0.5, 0.5, "Stalemate")
+
+    return None
 
 
 def play_turn(board_size: int, turn_number: int, turn_color: Color, pieces: List[Piece], cmd: str, path: str) \
