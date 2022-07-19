@@ -13,19 +13,33 @@ Yes, I know there are already lots of programs like this and official AI tournam
 
 ## Usage
 
-To play, you just need to call
+To play, you need to call
 
 ```
-python3 main.py "command to execute the first AI" "command to execute the second AI"
+python3 main.py "command to execute the first AI" "command to execute the second AI" "command to execute the third AI" ...
 ```
 
-For example, to use the default AI:
+At the moment, only two AI are supported: for example, to use the default AI call:
 
 ```
 python3 main.py "python3 AI/stupid_ai.py" "python3 AI/stupid_ai.py"
 ```
 
+The AI executable will receive the path of a file containing the state of the board and the possible moves via args, it
+must print to the console the move and then exit(0).
 
-The AI executable will receive the path of a json containing the state of the board and the possible moves via args, it must print to the console the move and then exit(0).
+Output example:
 
-During play, a log file with all the moves will be saved for training.
+```
+Game 0: 0.5-0.5 (50 Rule)
+Game 1: 0.5-0.5 (50 Rule)
+Game 2: 0-1 (Checkmate)
+Game 3: 1-0 (Checkmate)
+Game 4: 0.5-0.5 (Repetition)
+Game 5: 0.5-0.5 (Repetition)
+Game 6: 0.5-0.5 (Stalemate)
+Game 7: 0.5-0.5 (Repetition)
+Game 8: 0.5-0.5 (Repetition)
+Game 9: 0.5-0.5 (Repetition)
+Results: 5.0-5.0
+```
