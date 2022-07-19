@@ -17,21 +17,21 @@ def test_pawn_start_catch_right_white() -> None:
 
 def test_pawn_start_catch_right_black() -> None:
     """Tests the available rules of a pawn that can capture an enemy"""
-    piece = Piece(Color.BLACK, "P", 3, 3, False)
-    enemy = Piece(Color.WHITE, "P", 2, 2, False)
+    piece = Piece(Color.BLACK, "P", 3, 3, True)
+    enemy = Piece(Color.WHITE, "P", 2, 2, True)
     print_board(8, [piece, enemy])
     result = get_moves_pawn(8, piece, [piece, enemy])
-    expected = ["c2", "c1", "cxb2"]
+    expected = ["c2", "cxb2"]
     assert_same_move(expected, result)
 
 
 def test_pawn_start_catch_left_black() -> None:
     """Tests the available rules of a pawn that can capture an enemy"""
-    piece = Piece(Color.BLACK, "P", 3, 3, False)
-    enemy = Piece(Color.WHITE, "P", 4, 2, False)
+    piece = Piece(Color.BLACK, "P", 3, 3, True)
+    enemy = Piece(Color.WHITE, "P", 4, 2, True)
     print_board(8, [piece, enemy])
     result = get_moves_pawn(8, piece, [piece, enemy])
-    expected = ["c2", "c1", "cxd2"]
+    expected = ["c2", "cxd2"]
     assert_same_move(expected, result)
 
 
