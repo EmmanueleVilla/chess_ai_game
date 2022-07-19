@@ -20,13 +20,14 @@ from utils import board_to_string
 def start_game(args: List[str]) -> None:
     """Starts 10 games"""
     path = get_session_id()
-    white_points = 0
-    black_points = 0
+    white_points = 0.0
+    black_points = 0.0
     for i in range(0, 10):
         result = play(8, args, i, path)
         white_points += result.white
         black_points += result.black
-    print(f'Results: ${white_points}-${black_points}')
+        print(f'{result.white}-{result.black} ({result.message})')
+    print(f'Results: {white_points}-{black_points}')
 
 
 def play(board_size: int, args: List[str], game_id: int, base_path: str) -> GameResult:
@@ -55,7 +56,7 @@ def play(board_size: int, args: List[str], game_id: int, base_path: str) -> Game
         board_count = repetitions.get(board_hash, 0)
         repetitions[board_hash] = board_count + 1
 
-        end = check_end_turn(board_count, result[0], turn_color)
+        end = check_end_turn(board_count + 1, fifty_rule_count, result[0], turn_color)
         if end is not None:
             an_log += f'{end.white}-{end.black}'
             an_log += f' ({end.message})'
@@ -77,7 +78,7 @@ def play(board_size: int, args: List[str], game_id: int, base_path: str) -> Game
         board_count = repetitions.get(board_hash, 0)
         repetitions[board_hash] = board_count + 1
 
-        end = check_end_turn(board_count, result[0], turn_color)
+        end = check_end_turn(board_count + 1, fifty_rule_count, result[0], turn_color)
         if end is not None:
             an_log += f'{end.white}-{end.black}'
             an_log += f' ({end.message})'
@@ -95,10 +96,13 @@ def play(board_size: int, args: List[str], game_id: int, base_path: str) -> Game
     return GameResult(0.5, 0.5, "Turns elapsed")
 
 
-def check_end_turn(board_count: int, move: str, color: Color) -> Union[GameResult, None]:
+def check_end_turn(board_count: int, fifty_rule_count: int, move: str, color: Color) -> Union[GameResult, None]:
     """Check if the match is ended"""
     if board_count == 3:
         return GameResult(0.5, 0.5, "Repetition")
+
+    if fifty_rule_count == 50:
+        return GameResult(0.5, 0.5, "50 Rule")
 
     if "#" in move:
         return GameResult(1 if color == Color.WHITE else 0, 0 if color == Color.WHITE else 1, "Checkmate")
