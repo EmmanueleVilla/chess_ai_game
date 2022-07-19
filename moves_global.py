@@ -14,7 +14,7 @@ def get_all_moves(board_size: int, pieces: List[Piece], color: Color) -> List[Mo
     full = reduce(lambda x, y: x + y,
                   [get_moves(board_size, piece, pieces) for piece in pieces if piece.color == color])
     applied_moves = [(move, apply_move(pieces, move)) for move in full]
-    full = fix_check_info(board_size, color, applied_moves)
+    full = fix_check_info(board_size, pieces, color, applied_moves)
     full = fix_ambiguities(pieces, full)
     return full
 
@@ -27,7 +27,8 @@ def fix_ambiguities(pieces: List[Piece], full: List[Move]) -> List[Move]:
     return full
 
 
-def fix_check_info(board_size: int, color: Color, applied_moves: List[Tuple[Move, List[Piece]]]) -> List[Move]:
+def fix_check_info(board_size: int, pieces: List[Piece], color: Color, applied_moves: List[Tuple[Move, List[Piece]]]) \
+        -> List[Move]:
     """Adds a + at the end of the moves that cause a check to the opponent
         or a # if it's a checkmate
         and removes the moves that cause a check to me"""
@@ -38,9 +39,10 @@ def fix_check_info(board_size: int, color: Color, applied_moves: List[Tuple[Move
         if is_king_in_check(board_size, move[1], color):
             continue
         if is_king_in_check(board_size, move[1], enemy_color):
-            king = [piece for piece in move[1] if piece.color == enemy_color and piece.name == "K"]
-            king_moves = get_moves(board_size, king[0], move[1])
-            if len(king_moves) == 0:
+            enemy_moves = reduce(lambda x, y: x + y,
+                                 [get_moves(board_size, piece, move[1]) for piece in pieces if
+                                  piece.color == enemy_color])
+            if len(enemy_moves) == 0:
                 # checkmate -> add #
                 result.append(copy_move(move[0], Check.CHECKMATE))
             else:

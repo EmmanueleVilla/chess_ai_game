@@ -1,3 +1,4 @@
+import hashlib
 import os.path
 import subprocess
 from typing import List, Tuple
@@ -32,37 +33,88 @@ def play(board_size: int, args: List[str], game_id: int, base_path: str) -> None
     board = board_to_string(board_size, pieces)
     print(board)
     write_board(path, board)
-
-    while turn_number < 50:
+    fifty_rule_count = 0
+    repetitions: dict[str, int] = {}
+    while turn_number < 1000:
         an_log = f'{turn_number}. '
         turn_color = Color.WHITE
         result = play_turn(board_size, turn_number, turn_color, pieces, args[0],
                            path + "/" + MESSAGE_FILENAME)
         pieces = result[1]
-
         an_log += result[0]
         board = board_to_string(board_size, pieces)
         print(board)
         write_board(path, board)
+        board_hash = hashlib.md5(board.encode('utf-8')).hexdigest()
+        board_count = repetitions.get(board_hash, 0)
+        repetitions[board_hash] = board_count + 1
+
+        if board_count + 1 == 3:
+            an_log += " 1/2-1/2 (Repetition)"
+            write_an(path, an_log)
+            break
+
+        if "#" in result[0]:
+            an_log += " 1-0"
+            write_an(path, an_log)
+            break
+
+        if "Stalemate" in result[0]:
+            an_log += " 1/2-1/2 (Stalemate)"
+            write_an(path, an_log)
+            break
+
+        if "+" in result[0]:
+            fifty_rule_count = 0
 
         turn_color = Color.BLACK
         result = play_turn(board_size, turn_number, turn_color, pieces, args[0],
                            path + "/" + MESSAGE_FILENAME)
         pieces = result[1]
-
         an_log += f' {result[0]}\n'
-        write_an(path, an_log)
         board = board_to_string(board_size, pieces)
         print(board)
         write_board(path, board)
 
+        board_hash = hashlib.md5(board.encode('utf-8')).hexdigest()
+        board_count = repetitions.get(board_hash, 0)
+        repetitions[board_hash] = board_count + 1
+
+        if board_count + 1 == 3:
+            an_log += " 1/2-1/2 (Repetition)"
+            write_an(path, an_log)
+            break
+
+        if "#" in result[0]:
+            an_log += " 0-1"
+            write_an(path, an_log)
+            break
+
+        if "Stalemate" in result[0]:
+            an_log += " 1/2-1/2 (Stalemate)"
+            write_an(path, an_log)
+            break
+
+        if fifty_rule_count == 50:
+            an_log += " 1/2-1/2 (50 rule)"
+            write_an(path, an_log)
+            break
+
+        if "+" in result[0]:
+            fifty_rule_count = 0
+
+        write_an(path, an_log)
+
         turn_number += 1
+        fifty_rule_count += 1
 
 
 def play_turn(board_size: int, turn_number: int, turn_color: Color, pieces: List[Piece], cmd: str, path: str) \
         -> Tuple[str, List[Piece]]:
     """Asks the AI to return the move to be played"""
     moves = get_all_moves(board_size, pieces, turn_color)
+    if len(moves) == 0:
+        return "Stalemate", pieces
     state = GameState(board_size, turn_number, turn_color, pieces, moves)
     encoded = jsonpickle.encode(state)
     write_message(path, encoded)
@@ -83,6 +135,5 @@ def process_move(pieces: List[Piece], move: str, moves: List[Move]) -> Tuple[str
     """Process the move returned by the AI"""
     move_detail = [m for m in moves if m.to_an() == move]
     if len(move_detail) == 0:
-        # Todo: Handle move not defined
         return "Invalid Move", pieces
     return move, apply_move(pieces, move_detail[0])
