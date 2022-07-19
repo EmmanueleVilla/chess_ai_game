@@ -5,7 +5,6 @@
 ### Moves
 
 * Add en passant capture
-* Add pawn promotion
 * Add castling
 
 ### Tests

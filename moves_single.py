@@ -2,7 +2,7 @@ from functools import reduce
 from typing import List, Tuple
 
 from color import Color
-from move import Move
+from move import Move, copy_move_edit_promotion
 from moves_utils import get_moves_with_direction
 from piece import Piece
 
@@ -32,9 +32,18 @@ def get_moves_pawn(board_size: int, piece: Piece, pieces: List[Piece]) -> List[M
     left: List[Move] = get_moves_with_direction(board_size, piece, pieces, -1,
                                                 direction, 1,
                                                 only_on_enemy=True)
+    result: List[Move] = []
+    for move in forward + right + left:
+        if (piece.color == Color.WHITE and move.coord.j == 8) or (piece.color == Color.BLACK and move.coord.j == 1):
+            result.append(copy_move_edit_promotion(move, "Q"))
+            result.append(copy_move_edit_promotion(move, "N"))
+            result.append(copy_move_edit_promotion(move, "R"))
+            result.append(copy_move_edit_promotion(move, "B"))
+        else:
+            result.append(move)
+
     # Todo: add en-passant capture
-    # Todo: add promotion
-    return forward + right + left
+    return result
 
 
 def get_moves_rook(board_size: int, piece: Piece, pieces: List[Piece]) -> List[Move]:

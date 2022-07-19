@@ -3,7 +3,7 @@ from typing import List, Tuple
 
 from check import Check
 from color import Color
-from move import Move, copy_move
+from move import Move, copy_move_edit_check
 from moves_applier import apply_move
 from moves_single import get_moves
 from piece import Piece
@@ -50,10 +50,10 @@ def fix_check_info(board_size: int, pieces: List[Piece], color: Color, applied_m
                                   piece.color == enemy_color])
             if len(enemy_moves) == 0:
                 # checkmate -> add #
-                result.append(copy_move(move[0], Check.CHECKMATE))
+                result.append(copy_move_edit_check(move[0], Check.CHECKMATE))
             else:
                 # check -> add +
-                result.append(copy_move(move[0], Check.CHECK))
+                result.append(copy_move_edit_check(move[0], Check.CHECK))
         else:
             result.append(move[0])
     return result
