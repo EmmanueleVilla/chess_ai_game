@@ -120,20 +120,13 @@ step will be printed in the logs
 #### Missing Moves
 
 * Add en passant capture
-* Add castling
+* Add castling (missing tests and move application)
 
 #### Refactor
 
 * Split long methods and make them more functional
+* Restore pylint default constraint
 
 #### Tests
 
 * Add unit tests that re-play the games in the /games/ folder and fails if a move is illegal
-
-### Performance
-
-* Profile and optimize the speed execution
-
-### Next steps
-
-* Use a socket system instead of opening child processes
