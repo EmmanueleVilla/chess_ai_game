@@ -11,8 +11,6 @@
 
 * Set number of games as arg
 * Accept N AIs as args and start tournament
-* Draw after 50 turns without captures or pawn moving
-* Draw after 250 turns
 
 ### Log
 
