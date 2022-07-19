@@ -115,4 +115,15 @@ step will be printed in the logs
 
 ## TODO
 
-You can find the list of the missing features in the [TODO.md](TODO.md) file
+#### Missing Moves
+
+* Add en passant capture
+* Add castling
+
+#### Refactor
+
+* Split long methods and make them more functional
+
+#### Tests
+
+* Add unit tests that re-play the games in the /games/ folder and fails if a move is illegal
