@@ -1,5 +1,5 @@
 from functools import reduce
-from typing import List, Tuple
+from typing import List, Tuple, Set
 
 from check import Check
 from color import Color
@@ -9,7 +9,7 @@ from moves_single import get_moves
 from piece import Piece
 
 
-def get_all_moves(board_size: int, pieces: List[Piece], color: Color, fix_enemy_check_info: bool = True) -> List[Move]:
+def get_all_moves(board_size: int, pieces: Set[Piece], color: Color, fix_enemy_check_info: bool = True) -> List[Move]:
     """Returns all the possible moves on the board for the given pieces of the given color"""
     full = reduce(lambda x, y: x + y,
                   [get_moves(board_size, piece, pieces) for piece in pieces if piece.color == color])
@@ -33,7 +33,7 @@ def fix_ambiguities(full: List[Move]) -> List[Move]:
     return full
 
 
-def fix_check_info(board_size: int, color: Color, applied_moves: List[Tuple[Move, List[Piece]]],
+def fix_check_info(board_size: int, color: Color, applied_moves: List[Tuple[Move, Set[Piece]]],
                    fix_enemy_check_info: bool) -> List[Move]:
     """Adds a + at the end of the moves that cause a check to the opponent
         or a # if it's a checkmate
@@ -57,7 +57,7 @@ def fix_check_info(board_size: int, color: Color, applied_moves: List[Tuple[Move
     return result
 
 
-def is_king_in_check(board_size: int, pieces: List[Piece], color: Color) -> bool:
+def is_king_in_check(board_size: int, pieces: Set[Piece], color: Color) -> bool:
     """Returns true if on this board the king of the given color is in check"""
     full: List[Move] = reduce(lambda x, y: x + y,
                               [get_moves(board_size, piece, pieces) for piece in pieces if piece.color != color], [])

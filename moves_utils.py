@@ -1,11 +1,11 @@
-from typing import List
+from typing import List, Set
 
 from board import search_by_indexes
 from move import Move
 from piece import Piece
 
 
-def get_moves_with_direction(board_size: int, piece: Piece, pieces: List[Piece], delta_i: int, delta_j: int,
+def get_moves_with_direction(board_size: int, piece: Piece, pieces: Set[Piece], delta_i: int, delta_j: int,
                              stop_on_count: int, stop_on_enemy: bool = False, only_on_enemy: bool = False) \
         -> List[Move]:
     """Calculate the possible moves in the given direction,

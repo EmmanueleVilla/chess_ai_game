@@ -1,16 +1,16 @@
-from typing import List
+from typing import Set
 
 from board import search_by_indexes
 from color import Color
 from piece import Piece
 
 
-def print_board(board_size: int, pieces: List[Piece]) -> None:
+def print_board(board_size: int, pieces: Set[Piece]) -> None:
     """Prints the board"""
     print(board_to_string(board_size, pieces))
 
 
-def board_to_string(board_size: int, pieces: List[Piece]) -> str:
+def board_to_string(board_size: int, pieces: Set[Piece]) -> str:
     """Returns a string representation of the board"""
     result: str = ""
     gray = '\033[90m'

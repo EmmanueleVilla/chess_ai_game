@@ -1,7 +1,7 @@
 import hashlib
 import os.path
 import subprocess
-from typing import List, Tuple, Union
+from typing import List, Tuple, Union, Set
 
 from board import build_pieces
 from color import Color
@@ -116,8 +116,8 @@ def encode_game_state(state: GameState) -> str:
     return str(state)
 
 
-def play_turn(board_size: int, turn_number: int, turn_color: Color, pieces: List[Piece], cmd: str, path: str) \
-        -> Tuple[str, List[Piece]]:
+def play_turn(board_size: int, turn_number: int, turn_color: Color, pieces: Set[Piece], cmd: str, path: str) \
+        -> Tuple[str, Set[Piece]]:
     """Asks the AI to return the move to be played"""
     moves = get_all_moves(board_size, pieces, turn_color)
     if len(moves) == 0:
@@ -138,7 +138,7 @@ def play_turn(board_size: int, turn_number: int, turn_color: Color, pieces: List
         return "None", pieces
 
 
-def process_move(pieces: List[Piece], move: str, moves: List[Move]) -> Tuple[str, List[Piece]]:
+def process_move(pieces: Set[Piece], move: str, moves: List[Move]) -> Tuple[str, Set[Piece]]:
     """Process the move returned by the AI"""
     move_detail = [m for m in moves if m.an_string == move]
     if len(move_detail) == 0:

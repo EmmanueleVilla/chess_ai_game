@@ -28,9 +28,10 @@ class Piece:
                 isinstance(obj, Piece)
                 and obj.i == self.i
                 and obj.j == self.j
-                and obj.color == self.color
-                and obj.name == self.name
         )
+
+    def __hash__(self) -> int:
+        return hash((self.i, self.j))
 
     def __str__(self) -> str:
         return f'{self.name}{"B" if self.color == Color.BLACK else "W"}: {to_letter(self.i)}{self.j}'
