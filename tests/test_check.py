@@ -1,0 +1,37 @@
+from board import build_pieces
+from color import Color
+from moves_applier import apply_move
+from moves_global import get_all_moves
+
+
+def test_king_in_checkmate() -> None:
+    """Plays a fixed match to check the king checkmate at the end"""
+    pieces = build_pieces(8)
+
+    # Turn 1
+    moves = get_all_moves(8, pieces, Color.WHITE)
+    pieces = apply_move(pieces, [move for move in moves if move.to_an() == "g3"][0])
+
+    moves = get_all_moves(8, pieces, Color.BLACK)
+    pieces = apply_move(pieces, [move for move in moves if move.to_an() == "Nc6"][0])
+
+    # Turn 2
+    moves = get_all_moves(8, pieces, Color.WHITE)
+    pieces = apply_move(pieces, [move for move in moves if move.to_an() == "h3"][0])
+
+    moves = get_all_moves(8, pieces, Color.BLACK)
+    pieces = apply_move(pieces, [move for move in moves if move.to_an() == "a5"][0])
+
+    # Turn 3
+    moves = get_all_moves(8, pieces, Color.WHITE)
+    pieces = apply_move(pieces, [move for move in moves if move.to_an() == "f4"][0])
+
+    moves = get_all_moves(8, pieces, Color.BLACK)
+    pieces = apply_move(pieces, [move for move in moves if move.to_an() == "e6"][0])
+
+    # Turn 4
+    moves = get_all_moves(8, pieces, Color.WHITE)
+    pieces = apply_move(pieces, [move for move in moves if move.to_an() == "g4"][0])
+
+    moves = get_all_moves(8, pieces, Color.BLACK)
+    pieces = apply_move(pieces, [move for move in moves if move.to_an() == "Qh4#"][0])

@@ -1,7 +1,3 @@
-### Bugs
-
-* Checkmate is wrongly recognized as Stalemate
-
 ### Moves
 
 * Add en passant capture
