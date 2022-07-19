@@ -15,15 +15,21 @@ def get_all_moves(board_size: int, pieces: List[Piece], color: Color) -> List[Mo
                   [get_moves(board_size, piece, pieces) for piece in pieces if piece.color == color])
     applied_moves = [(move, apply_move(pieces, move)) for move in full]
     full = fix_check_info(board_size, pieces, color, applied_moves)
-    full = fix_ambiguities(pieces, full)
+    full = fix_ambiguities(full)
     return full
 
 
-def fix_ambiguities(pieces: List[Piece], full: List[Move]) -> List[Move]:
+def fix_ambiguities(full: List[Move]) -> List[Move]:
     """Adds additional information to the moves if some of them are equals"""
-    print(pieces)
-    print(full)
-    # Todo: Implement this
+    result: List[Move] = []
+    for move in full:
+        duplicates = [m for m in full if m.coord == move.coord]
+        if len(duplicates) > 1:
+            same_i = all(x.piece.i() == duplicates[0].piece.i() for x in duplicates)
+            same_j = all(x.piece.j() == duplicates[0].piece.j() for x in duplicates)
+            for duplicate in duplicates:
+                duplicate.print_i = len(duplicates) > 2 or not same_i or (same_i and same_j)
+                duplicate.print_j = len(duplicates) > 2 or same_i
     return full
 
 

@@ -7,7 +7,6 @@
 * Add en passant capture
 * Add pawn promotion
 * Add castling
-* Add coordinate(s) to ambiguous moves
 
 ### Tests
 
