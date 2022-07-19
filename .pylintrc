@@ -8,3 +8,5 @@ max-line-length=120
 max-statements=75
 max-locals=20
 max-attributes=10
+max-branches=20
+max-returns=20

@@ -1,7 +1,7 @@
 from board import build_pieces
 from color import Color
+from moves import get_all_moves
 from moves_applier import apply_move
-from moves_global import get_all_moves
 
 
 def test_king_in_checkmate() -> None:

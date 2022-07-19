@@ -1,6 +1,6 @@
 from color import Color
 from moves_applier import apply_move
-from moves_single import get_moves_pawn
+from moves import get_moves_pawn
 from piece import Piece
 from tests.base import assert_same_move
 

@@ -9,8 +9,8 @@ from game_result import GameResult
 from game_state import GameState
 from log import get_session_id, init_files, write_board, write_message, MESSAGE_FILENAME, write_an
 from move import Move
+from moves import get_all_moves
 from moves_applier import apply_move
-from moves_global import get_all_moves
 from piece import Piece
 from utils import board_to_string
 

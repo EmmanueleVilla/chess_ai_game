@@ -1,5 +1,5 @@
 from color import Color
-from moves_global import get_all_moves
+from moves import get_all_moves
 from piece import Piece
 from tests.base import assert_same_move
 
