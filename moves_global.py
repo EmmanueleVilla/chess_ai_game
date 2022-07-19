@@ -21,7 +21,7 @@ def get_all_moves(board_size: int, pieces: List[Piece], color: Color) -> List[Mo
 
 def fix_ambiguities(full: List[Move]) -> List[Move]:
     """Adds additional information to the moves if some of them are equals"""
-    result: List[Move] = []
+    # Todo: Refactor this to avoid modifying the move. Create a new one instead
     for move in full:
         duplicates = [m for m in full if m.coord == move.coord]
         if len(duplicates) > 1:
