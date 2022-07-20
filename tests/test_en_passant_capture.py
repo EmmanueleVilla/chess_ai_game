@@ -23,6 +23,6 @@ def test_en_passant_apply() -> None:
     pieces = {piece, enemy}
 
     result = get_all_moves(8, pieces, Color.BLACK)
-    en_passant = [move for move in result if move.en_passant][0]
+    en_passant = [move for move in result if move.en_passant.name != ""][0]
     board = apply_move(pieces, en_passant)
-    print(board)
+    assert len(board) == 1

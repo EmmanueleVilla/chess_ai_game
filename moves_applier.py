@@ -8,7 +8,7 @@ from piece import Piece, copy_piece_edit_en_passant
 
 def apply_move(pieces: Set[Piece], move: Move) -> Set[Piece]:
     """Applies the given move to the pieces and returns the new configuration"""
-    remove = [(move.piece.i, move.piece.j)]
+    remove = [(move.piece.i, move.piece.j), (move.en_passant.i, move.en_passant.j)]
     add = []
     if move.castling == Castling.NONE:
         remove.append((move.i, move.j))

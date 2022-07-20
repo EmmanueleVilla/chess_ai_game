@@ -117,10 +117,6 @@ step will be printed in the logs
 
 ## TODO
 
-#### Missing Moves
-
-* Add en passant capture
-
 #### Refactor
 
 * Split long methods and make them more functional
