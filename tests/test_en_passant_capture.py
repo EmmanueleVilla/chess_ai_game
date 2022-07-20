@@ -12,7 +12,7 @@ def test_en_passant_capture() -> None:
     pieces = {piece, enemy}
 
     result = get_all_moves(8, pieces, Color.BLACK)
-    expected = ["b3", "bxa3 e.p."]
+    expected = ["b3", "bxa3"]
     assert_same_move(expected, result)
 
 
