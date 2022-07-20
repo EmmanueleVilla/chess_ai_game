@@ -41,6 +41,7 @@ def start_game(args: List[str]) -> None:
     message = f'Results: {white_points}-{black_points}'
     print(message)
     write_game(path, message)
+    show_board(screen, 8, {Piece(Color.WHITE, "", -1, -1)}, path + GAMES_FILENAME)
 
 
 def play(screen: pygame.surface.Surface, board_size: int, args: List[str], game_id: int, base_path: str) -> GameResult:
