@@ -6,6 +6,9 @@ from piece import to_letter, Piece
 class Move:
     """Represents a move on the board"""
 
+    # pylint: disable=too-many-instance-attributes
+    # I may refactor this one day, but all those attributes are needed for a move description
+
     def __init__(self, piece: Piece, i: int, j: int, is_capture: bool, check: Check = Check.NONE, promotion: str = "",
                  castling: Castling = Castling.NONE):
         self.piece = piece

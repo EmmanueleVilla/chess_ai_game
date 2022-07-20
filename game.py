@@ -42,12 +42,12 @@ def play(board_size: int, args: List[str], game_id: int, base_path: str) -> Game
     fifty_rule_count = 0
     repetitions: dict[str, int] = {}
     while turn_number < 1000:
-        an_log = f'{turn_number}. '
+        write_an(path, f'{turn_number}. ')
         turn_color = Color.WHITE
         result = play_turn(board_size, turn_number, turn_color, pieces, args[0],
                            path + "/" + MESSAGE_FILENAME)
         pieces = result[1]
-        an_log += result[0]
+        write_an(path, result[0])
         board = board_to_string(board_size, pieces)
         write_board(path, board)
         board_hash = hashlib.md5(board.encode('utf-8')).hexdigest()
@@ -56,9 +56,8 @@ def play(board_size: int, args: List[str], game_id: int, base_path: str) -> Game
 
         end = check_end_turn(board_count + 1, fifty_rule_count, result[0], turn_color)
         if end is not None:
-            an_log += f'{end.white}-{end.black}'
-            an_log += f' ({end.message})'
-            write_an(path, an_log)
+            write_an(path, f'{end.white}-{end.black}')
+            write_an(path, f' ({end.message})')
             return end
 
         if "+" in result[0]:
@@ -68,7 +67,7 @@ def play(board_size: int, args: List[str], game_id: int, base_path: str) -> Game
         result = play_turn(board_size, turn_number, turn_color, pieces, args[1],
                            path + "/" + MESSAGE_FILENAME)
         pieces = result[1]
-        an_log += f' {result[0]}\n'
+        write_an(path, f' {result[0]}\n')
         board = board_to_string(board_size, pieces)
         write_board(path, board)
 
@@ -78,15 +77,12 @@ def play(board_size: int, args: List[str], game_id: int, base_path: str) -> Game
 
         end = check_end_turn(board_count + 1, fifty_rule_count, result[0], turn_color)
         if end is not None:
-            an_log += f'{end.white}-{end.black}'
-            an_log += f' ({end.message})'
-            write_an(path, an_log)
+            write_an(path, f'{end.white}-{end.black}')
+            write_an(path, f' ({end.message})')
             return end
 
         if "+" in result[0]:
             fifty_rule_count = 0
-
-        write_an(path, an_log)
 
         turn_number += 1
         fifty_rule_count += 1
