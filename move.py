@@ -46,7 +46,6 @@ class Move:
         output += "x" if self.is_capture else ""
         output += to_letter(self.i)
         output += f'{self.j}'
-        output += " e.p." if self.en_passant.name != "" else ""
         output += f'={self.promotion}' if self.promotion != "" else ""
         output += "+" if self.check == Check.CHECK else ""
         output += "#" if self.check == Check.CHECKMATE else ""
