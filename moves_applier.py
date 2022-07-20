@@ -3,7 +3,7 @@ from typing import Set
 from castling import Castling
 from color import Color
 from move import Move
-from piece import Piece
+from piece import Piece, copy_piece_edit_en_passant
 
 
 def apply_move(pieces: Set[Piece], move: Move) -> Set[Piece]:
@@ -13,7 +13,7 @@ def apply_move(pieces: Set[Piece], move: Move) -> Set[Piece]:
     if move.castling == Castling.NONE:
         remove.append((move.i, move.j))
         add.append(Piece(move.piece.color, move.promotion if move.promotion != "" else move.piece.name, move.i,
-                         move.j, True))
+                         move.j, True, move.piece.name == "P" and abs(move.piece.j - move.j) > 1))
     else:
         j = 1 if move.piece.color == Color.WHITE else 8
         king_i = 1 if move.castling == Castling.QUEEN_SIDE else 8
@@ -22,5 +22,6 @@ def apply_move(pieces: Set[Piece], move: Move) -> Set[Piece]:
         add.append(Piece(move.piece.color, move.piece.name, king_new_i, j, True))
         rook_delta_from_king = 1 if move.castling == Castling.QUEEN_SIDE else -1
         add.append(Piece(move.piece.color, "R", king_new_i + rook_delta_from_king, j, True))
-
-    return set([piece for piece in pieces if (piece.i, piece.j) not in remove] + add)
+        # reset en_passant value of my old pieces
+    return set([copy_piece_edit_en_passant(piece, piece.en_passant and piece.color == move.piece.color) for piece in
+                pieces if (piece.i, piece.j) not in remove] + add)

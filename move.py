@@ -20,8 +20,8 @@ class Move:
         self.print_j = False
         self.promotion = promotion
         self.castling = castling
-        self.an_string = self.__to_an()
         self.en_passant = en_passant
+        self.an_string = self.__to_an()
 
     def set_print_i(self, print_i: bool) -> None:
         """Set the print i value"""

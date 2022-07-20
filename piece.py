@@ -36,3 +36,8 @@ class Piece:
 
     def __str__(self) -> str:
         return f'{self.name}{"B" if self.color == Color.BLACK else "W"}: {to_letter(self.i)}{self.j}'
+
+
+def copy_piece_edit_en_passant(original: Piece, en_passant: bool) -> Piece:
+    """Copy the given piece modifying the en_passant value"""
+    return Piece(original.color, original.name, original.i, original.j, original.moved, en_passant)
