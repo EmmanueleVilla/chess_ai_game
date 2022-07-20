@@ -49,7 +49,7 @@ You can see an example of games played [on youtube](https://youtu.be/hnC_k2zBkHU
 
 ## Logs
 
-During play, a folder named logs/{games_id} will be created in the root of the project. This folder contains 10
+During play, a folder named logs/{games_id} will be created in the root of the project. This folder contains a log file (with the same output as the console) and 10
 sub-folders (one for each game played), containing 3 files:
 
 * an.txt: the log of the game using the [Algebraic Notation](https://en.wikipedia.org/wiki/Algebraic_notation_(chess)).
