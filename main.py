@@ -19,3 +19,4 @@ def main() -> None:
 
 
 main()
+input("Press Enter to continue...")

@@ -4,6 +4,7 @@ from datetime import datetime
 AN_FILENAME = "/an.txt"
 BOARD_FILENAME = "/board.txt"
 MESSAGE_FILENAME = "/message.txt"
+GAMES_FILENAME = "/game.txt"
 
 
 def get_session_id() -> str:
@@ -16,8 +17,16 @@ def get_session_id() -> str:
     return path
 
 
-def init_files(path: str) -> None:
+def init_game_log_file(base_path: str) -> None:
+    """Initialize the game log file at the given path"""
+    os.makedirs(base_path)
+    with open(base_path + GAMES_FILENAME, "x", encoding="utf-8") as logs_game:
+        logs_game.close()
+
+
+def init_files(base_path: str, game_id: int) -> str:
     """Initialize the log files at the given path"""
+    path = os.path.join(base_path, f'{game_id}')
     os.makedirs(path)
     with open(path + AN_FILENAME, "x", encoding="utf-8") as logs_an:
         logs_an.close()
@@ -25,6 +34,7 @@ def init_files(path: str) -> None:
         logs_board.close()
     with open(path + MESSAGE_FILENAME, "x", encoding="utf-8") as message_game:
         message_game.close()
+    return path
 
 
 def write_board(path: str, board: str) -> None:
@@ -43,3 +53,9 @@ def write_message(path: str, message: str) -> None:
     """Replace the message in the given file"""
     with open(path, "w", encoding="utf-8") as message_game:
         message_game.write(message)
+
+
+def write_game(path: str, message: str) -> None:
+    """Replace the message in the given file"""
+    with open(path + GAMES_FILENAME, "a", encoding="utf-8") as logs_game:
+        logs_game.write(message + "\n")
