@@ -23,5 +23,5 @@ def apply_move(pieces: Set[Piece], move: Move) -> Set[Piece]:
         rook_delta_from_king = 1 if move.castling == Castling.QUEEN_SIDE else -1
         add.append(Piece(move.piece.color, "R", king_new_i + rook_delta_from_king, j, True))
         # reset en_passant value of my old pieces
-    return set([copy_piece_edit_en_passant(piece, piece.en_passant and piece.color == move.piece.color) for piece in
+    return set([copy_piece_edit_en_passant(piece, piece.en_passant and piece.color != move.piece.color) for piece in
                 pieces if (piece.i, piece.j) not in remove] + add)
