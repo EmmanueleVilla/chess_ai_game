@@ -10,17 +10,18 @@ class Move:
     # I may refactor this one day, but all those attributes are needed for a move description
 
     def __init__(self, piece: Piece, i: int, j: int, is_capture: bool, check: Check = Check.NONE, promotion: str = "",
-                 castling: Castling = Castling.NONE):
+                 castling: Castling = Castling.NONE, en_passant: bool = False):
         self.piece = piece
         self.i = i
         self.j = j
-        self.is_capture = is_capture
+        self.is_capture = is_capture or en_passant
         self.check = check
         self.print_i = False
         self.print_j = False
         self.promotion = promotion
         self.castling = castling
         self.an_string = self.__to_an()
+        self.en_passant = en_passant
 
     def set_print_i(self, print_i: bool) -> None:
         """Set the print i value"""
@@ -44,6 +45,7 @@ class Move:
         output += "x" if self.is_capture else ""
         output += to_letter(self.i)
         output += f'{self.j}'
+        output += " e.p." if self.en_passant else ""
         output += f'={self.promotion}' if self.promotion != "" else ""
         output += "+" if self.check == Check.CHECK else ""
         output += "#" if self.check == Check.CHECKMATE else ""

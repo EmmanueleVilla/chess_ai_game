@@ -16,12 +16,13 @@ def to_letter(coordinate: int) -> str:
 class Piece:
     """Represents a piece on the board"""
 
-    def __init__(self, color: Color, name: str, i: int, j: int, moved: bool = False):
+    def __init__(self, color: Color, name: str, i: int, j: int, moved: bool = False, en_passant: bool = False):
         self.color = color
         self.name = name
         self.i = i
         self.j = j
         self.moved = moved
+        self.en_passant = en_passant
 
     def __eq__(self, obj: Any) -> bool:
         return (

@@ -93,7 +93,6 @@ def get_moves_king(board_size: int, piece: Piece, pieces: Set[Piece], should_che
                 castle = check_castling(board_size, piece, rook, pieces, enemy_moves)
                 if castle is not None:
                     castling.append(castle)
-    # Todo: Add castling
     return moves + castling
 
 
@@ -141,7 +140,7 @@ def get_all_moves(board_size: int, pieces: Set[Piece], color: Color, deep_check:
 
 def fix_ambiguities(full: List[Move]) -> List[Move]:
     """Adds additional information to the moves if some of them are equals"""
-    # Todo: Refactor this to avoid modifying the move. Create a new one instead
+    # This should create new instances of moves instead of modifying the incoming list
     for move in full:
         duplicates = [m for m in full if m.piece.name == move.piece.name and m.i == move.i and m.j == move.j]
         if len(duplicates) > 1:
