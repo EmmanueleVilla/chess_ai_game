@@ -143,17 +143,16 @@ def play_turn(board_size: int, turn_number: int, turn_color: Color, pieces: Set[
     state = GameState(board_size, turn_number, turn_color, pieces, moves)
     encoded = encode_game_state(state)
     write_message(path, encoded)
-    with subprocess.Popen(
-            f'{cmd} "{path}"',
-            stdout=subprocess.PIPE,
-            bufsize=1,
-            universal_newlines=True,
-            shell=True
-    ) as process:
-        if process.stdout is not None:
-            for line in process.stdout:
-                return process_move(pieces, line.replace("\n", ""), moves)
-        return "None", pieces
+    try:
+        process = subprocess.run(f'{cmd} "{path}"', timeout=5, shell=True, stdout=subprocess.PIPE,
+                                 bufsize=1,
+                                 check=True,
+                                 universal_newlines=True)
+        return process_move(pieces, process.stdout.replace("\n", ""), moves)
+    except subprocess.TimeoutExpired:
+        return "TimeoutExpired", pieces
+    except subprocess.CalledProcessError:
+        return "CalledProcessError", pieces
 
 
 def process_move(pieces: Set[Piece], move: str, moves: List[Move]) -> Tuple[str, Set[Piece]]:

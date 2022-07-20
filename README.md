@@ -53,6 +53,7 @@ During play, a folder named logs/{games_id} will be created in the root of the p
 sub-folders (one for each game played), containing 3 files:
 
 * an.txt: the log of the game using the [Algebraic Notation](https://en.wikipedia.org/wiki/Algebraic_notation_(chess)).
+  You can take this and paste it on [chess.com](https://www.chess.com/analysis) to analyze
 
 Example:
 
@@ -117,5 +118,10 @@ it and respond using a console log, printing the code of the move to be executed
 call.
 
 If the response is not included in the move list sent by the program, that player will skip the turn and an "Invalid
-Move"
-step will be printed in the logs
+Move" move will be printed in the logs.
+
+If the AI doesn't answer in 5 seconds, that player will skip the turn and a "TimeoutExpired" move will be printed in the
+logs.
+
+If the AI doesn't exit with error code 0, that player will skip the turn and a "CalledProcessError" move will be printed
+in the logs.
