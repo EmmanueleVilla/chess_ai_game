@@ -8,6 +8,8 @@ It's still a work in progress, and I'm learning python while doing it, so it may
 Yes, I know there are already lots of programs like this and official chess AI tournaments and stuff, this is just an
 exercise
 
+It is composed by a simple UI made with pygame
+
 ## Usage
 
 To play, you need to call
@@ -23,7 +25,7 @@ checkmate the opponent. Given the format above, you can start the game by execut
 python3 main.py "python3 AI/stupid_ai.py" "python3 AI/stupid_ai.py"
 ```
 
-The result is a console log containing the games id and the results of 10 games:
+In the console you can see the games id and the results of 10 games:
 
 ```
 2022_07_19_17_52_06_129423
@@ -39,7 +41,11 @@ Game 8: 0.5-0.5 (Repetition)
 Game 9: 0.5-0.5 (Repetition)
 Results: 5.0-5.0
 ```
-An explanation of why the match ended is explicited at the end of each game. The explanation can be Checkmate, Stalemate, 50 Rule or Repetition. The game may also end when it reaches the 1000th turn, but it should be impossible :P
+
+An explanation of why the match ended is explicited at the end of each game. The explanation can be Checkmate,
+Stalemate, 50 Rule or Repetition. The game may also end when it reaches the 1000th turn, but it should be impossible :P
+
+You can see an example of games played [on youtube](https://youtu.be/hnC_k2zBkHU)
 
 ## Logs
 
