@@ -12,6 +12,22 @@ def test_white_castling_queen_ok() -> None:
     assert len([move for move in expected if move.castling == Castling.QUEEN_SIDE]) == 1
 
 
+def test_white_castling_queen_ko_king_moved() -> None:
+    """Confirm that castling is possible on queen side"""
+    king = Piece(Color.WHITE, "K", 5, 1, True)
+    rook = Piece(Color.WHITE, "R", 1, 1, False)
+    expected = get_moves_king(8, king, {king, rook}, True)
+    assert len([move for move in expected if move.castling == Castling.QUEEN_SIDE]) == 0
+
+
+def test_white_castling_queen_ko_rook_moved() -> None:
+    """Confirm that castling is possible on queen side"""
+    king = Piece(Color.WHITE, "K", 5, 1, False)
+    rook = Piece(Color.WHITE, "R", 1, 1, True)
+    expected = get_moves_king(8, king, {king, rook}, True)
+    assert len([move for move in expected if move.castling == Castling.QUEEN_SIDE]) == 0
+
+
 def test_white_castling_queen_ko_check() -> None:
     """Confirm that castling is not possible on queen side"""
     king = Piece(Color.WHITE, "K", 5, 1, False)

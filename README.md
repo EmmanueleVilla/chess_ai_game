@@ -120,7 +120,6 @@ step will be printed in the logs
 #### Missing Moves
 
 * Add en passant capture
-* Add castling (missing tests and move application)
 
 #### Refactor
 
