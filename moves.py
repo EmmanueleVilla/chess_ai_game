@@ -13,20 +13,16 @@ from piece import Piece
 
 def get_moves(board_size: int, piece: Piece, pieces: Set[Piece], should_check_castling: bool) -> List[Move]:
     """Returns the available moves of the given piece in the given board"""
-    if piece.name == "P":
-        return get_moves_pawn(board_size, piece, pieces)
+    get_moves_dictionary = {
+        "P": get_moves_pawn,
+        "R": get_moves_rook,
+        "N": get_moves_knight,
+        "B": get_moves_bishop,
+        "Q": get_moves_queen
+    }
 
-    if piece.name == "R":
-        return get_moves_rook(board_size, piece, pieces)
-
-    if piece.name == "N":
-        return get_moves_knight(board_size, piece, pieces)
-
-    if piece.name == "B":
-        return get_moves_bishop(board_size, piece, pieces)
-
-    if piece.name == "Q":
-        return get_moves_queen(board_size, piece, pieces)
+    if piece.name in get_moves_dictionary:
+        return get_moves_dictionary[piece.name](board_size, piece, pieces)
 
     if piece.name == "K":
         return get_moves_king(board_size, piece, pieces, should_check_castling)
