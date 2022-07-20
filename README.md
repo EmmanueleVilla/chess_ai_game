@@ -1,6 +1,6 @@
 # Chess AI Game
 
-Chess AI Game is an artificial intelligence game written in python where two external artificial intelligence program
+Chess AI Game is an artificial intelligence game written in python where two external artificial intelligence programs
 play chess against each other.
 
 It's still a work in progress, and I'm learning python while doing it, so it may suck :)
