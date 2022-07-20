@@ -39,6 +39,7 @@ Game 8: 0.5-0.5 (Repetition)
 Game 9: 0.5-0.5 (Repetition)
 Results: 5.0-5.0
 ```
+An explanation of why the match ended is explicited at the end of each game. The explanation can be Checkmate, Stalemate, 50 Rule or Repetition. The game may also end when it reaches the 1000th turn, but it should be impossible :P
 
 ## Logs
 
@@ -46,8 +47,6 @@ During play, a folder named logs/{games_id} will be created in the root of the p
 sub-folders (one for each game played), containing 3 files:
 
 * an.txt: the log of the game using the [Algebraic Notation](https://en.wikipedia.org/wiki/Algebraic_notation_(chess)).
-  In addition, an explanation of why the match ended is explicited at the end. The explanation can be Checkmate,
-  Stalemate, 50 Rule or Repetition. The game may also end when it reaches the 1000th turn, but it should be impossible
 
 Example:
 
@@ -60,7 +59,7 @@ Example:
 6. Kf1 Ra7
 7. h3 Nc5
 8. dxc5 Qd1#
-0-1 (Checkmate)
+0-1
 ```
 
 * board.txt: the log of the game composed by the print of all the boards state. This is a colored log, so you'll want to
