@@ -1,5 +1,6 @@
 from castling import Castling
 from check import Check
+from color import Color
 from piece import to_letter, Piece
 
 
@@ -9,12 +10,12 @@ class Move:
     # pylint: disable=too-many-instance-attributes
     # I may refactor this one day, but all those attributes are needed for a move description
 
-    def __init__(self, piece: Piece, i: int, j: int, is_capture: bool, check: Check = Check.NONE, promotion: str = "",
-                 castling: Castling = Castling.NONE, en_passant: bool = False):
+    def __init__(self, piece: Piece, i: int, j: int, is_capture: bool, check: Check, promotion: str,
+                 castling: Castling, en_passant: Piece):
         self.piece = piece
         self.i = i
         self.j = j
-        self.is_capture = is_capture or en_passant
+        self.is_capture = is_capture or en_passant.name != ""
         self.check = check
         self.print_i = False
         self.print_j = False
@@ -45,18 +46,37 @@ class Move:
         output += "x" if self.is_capture else ""
         output += to_letter(self.i)
         output += f'{self.j}'
-        output += " e.p." if self.en_passant else ""
+        output += " e.p." if self.en_passant.name != "" else ""
         output += f'={self.promotion}' if self.promotion != "" else ""
         output += "+" if self.check == Check.CHECK else ""
         output += "#" if self.check == Check.CHECKMATE else ""
         return output
 
 
+def build_move(piece: Piece, i: int, j: int, is_capture: bool) -> Move:
+    """Creates a Move object with some default parameters"""
+    return Move(piece, i, j, is_capture, Check.NONE, "", Castling.NONE, Piece(Color.WHITE, "", -1, -1))
+
+
 def copy_move_edit_check(original: Move, check: Check) -> Move:
     """Copy the given move modifying the check value"""
-    return Move(original.piece, original.i, original.j, original.is_capture, check, original.promotion)
+    return Move(original.piece, original.i, original.j, original.is_capture, check, original.promotion,
+                original.castling, original.en_passant)
 
 
 def copy_move_edit_promotion(original: Move, promotion: str) -> Move:
-    """Copy the given move modifying the check value"""
-    return Move(original.piece, original.i, original.j, original.is_capture, original.check, promotion)
+    """Copy the given move modifying the promotion value"""
+    return Move(original.piece, original.i, original.j, original.is_capture, original.check, promotion,
+                original.castling, original.en_passant)
+
+
+def copy_move_edit_castling(original: Move, castling: Castling) -> Move:
+    """Copy the given move modifying the castling value"""
+    return Move(original.piece, original.i, original.j, original.is_capture, original.check, original.promotion,
+                castling, original.en_passant)
+
+
+def copy_move_edit_en_passant(original: Move, en_passant: Piece) -> Move:
+    """Copy the given move modifying the en_passant value"""
+    return Move(original.piece, original.i, original.j, original.is_capture, original.check, original.promotion,
+                original.castling, en_passant)

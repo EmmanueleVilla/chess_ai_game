@@ -1,7 +1,7 @@
 from typing import List, Set
 
 from board import search_by_indexes
-from move import Move
+from move import Move, build_move
 from piece import Piece
 
 
@@ -22,9 +22,9 @@ def get_moves_with_direction(board_size: int, piece: Piece, pieces: Set[Piece], 
         if occupier is not None:
             if occupier.color == piece.color or stop_on_enemy:
                 break
-            output.append(Move(piece, i, j, True))
+            output.append(build_move(piece, i, j, True))
             break
         if occupier is None and only_on_enemy:
             break
-        output.append(Move(piece, i, j, False))
+        output.append(build_move(piece, i, j, False))
     return output

@@ -5,7 +5,8 @@ from board import search_by_indexes
 from castling import Castling
 from check import Check
 from color import Color
-from move import Move, copy_move_edit_promotion, copy_move_edit_check
+from move import Move, copy_move_edit_promotion, copy_move_edit_check, build_move, copy_move_edit_castling, \
+    copy_move_edit_en_passant
 from moves_applier import apply_move
 from moves_utils import get_moves_with_direction
 from piece import Piece
@@ -50,7 +51,10 @@ def get_moves_pawn(board_size: int, piece: Piece, pieces: Set[Piece]) -> List[Mo
             result.append(copy_move_edit_promotion(move, "B"))
         else:
             result.append(move)
-
+    side_enemy_pawn = [p for p in pieces if
+                       p.color != piece.color and p.j == piece.j and abs(p.i - piece.i) == 1 and p.en_passant]
+    for enemy in side_enemy_pawn:
+        result.append(copy_move_edit_en_passant(build_move(piece, enemy.i, enemy.j + direction, True), enemy))
     # Todo: add en-passant capture
     return result
 
@@ -110,7 +114,8 @@ def check_castling(board_size: int, piece: Piece, rook: Piece, pieces: Set[Piece
     for i_to_be_checked in is_to_be_checked:
         if len([move for move in enemy_moves if move.i == i_to_be_checked and move.j == j]) > 0:
             return None
-    return Move(piece, 0, 0, False, Check.NONE, "", Castling.QUEEN_SIDE if rook.i == 1 else Castling.KING_SIDE)
+    return copy_move_edit_castling(build_move(piece, 0, 0, False),
+                                   Castling.QUEEN_SIDE if rook.i == 1 else Castling.KING_SIDE)
 
 
 def get_moves_from_deltas(board_size: int, piece: Piece, pieces: Set[Piece], deltas: List[Tuple[int, int]]) \
