@@ -56,8 +56,7 @@ def play(board_size: int, args: List[str], game_id: int, base_path: str) -> Game
 
         end = check_end_turn(board_count + 1, fifty_rule_count, result[0], turn_color)
         if end is not None:
-            write_an(path, f'{end.white}-{end.black}')
-            write_an(path, f' ({end.message})')
+            write_an(path, f' {end.get_white()}-{end.get_black()}')
             return end
 
         if "+" in result[0]:
@@ -77,8 +76,7 @@ def play(board_size: int, args: List[str], game_id: int, base_path: str) -> Game
 
         end = check_end_turn(board_count + 1, fifty_rule_count, result[0], turn_color)
         if end is not None:
-            write_an(path, f'{end.white}-{end.black}')
-            write_an(path, f' ({end.message})')
+            write_an(path, f' {end.get_white()}-{end.get_black()}')
             return end
 
         if "+" in result[0]:

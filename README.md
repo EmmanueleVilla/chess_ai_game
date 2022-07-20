@@ -114,13 +114,3 @@ call.
 If the response is not included in the move list sent by the program, that player will skip the turn and an "Invalid
 Move"
 step will be printed in the logs
-
-## TODO
-
-#### Refactor
-
-* Split long methods and make them more functional
-
-#### Tests
-
-* Add unit tests that re-play the games in the /games/ folder and fails if a move is illegal
