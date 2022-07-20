@@ -124,7 +124,6 @@ step will be printed in the logs
 #### Refactor
 
 * Split long methods and make them more functional
-* Restore pylint default constraint
 
 #### Tests
 
