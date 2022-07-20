@@ -105,40 +105,17 @@ def check_castling(board_size: int, piece: Piece, rook: Piece, pieces: Set[Piece
         -> Union[Move, None]:
     """Returns the castling move, if available"""
     j = 1 if piece.color == Color.WHITE else 8
-    if rook.i == 1:
-        if search_by_indexes(pieces, 2, j) is not None:
+    is_to_be_searched = [2, 3, 4] if rook.i == 1 else [7, 6]
+    for i_to_be_searched in is_to_be_searched:
+        if search_by_indexes(pieces, i_to_be_searched, j) is not None:
             return None
-        if search_by_indexes(pieces, 3, j) is not None:
+    if is_king_in_check(board_size, pieces, piece.color):
+        return None
+    is_to_be_checked = [1, 2, 3, 4] if rook.i == 1 else [8, 7, 6]
+    for i_to_be_checked in is_to_be_checked:
+        if len([move for move in enemy_moves if move.i == i_to_be_checked and move.j == j]) > 0:
             return None
-        if search_by_indexes(pieces, 4, j) is not None:
-            return None
-        if is_king_in_check(board_size, pieces, piece.color):
-            return None
-        if len([move for move in enemy_moves if move.i == 1 and move.j == j]) > 0:
-            return None
-        if len([move for move in enemy_moves if move.i == 2 and move.j == j]) > 0:
-            return None
-        if len([move for move in enemy_moves if move.i == 3 and move.j == j]) > 0:
-            return None
-        if len([move for move in enemy_moves if move.i == 4 and move.j == j]) > 0:
-            return None
-        return Move(piece, 0, 0, False, Check.NONE, "", Castling.QUEEN_SIDE)
-
-    if rook.i == 8:
-        if search_by_indexes(pieces, 7, j) is not None:
-            return None
-        if search_by_indexes(pieces, 6, j) is not None:
-            return None
-        if is_king_in_check(board_size, pieces, piece.color):
-            return None
-        if len([move for move in enemy_moves if move.i == 8 and move.j == j]) > 0:
-            return None
-        if len([move for move in enemy_moves if move.i == 7 and move.j == j]) > 0:
-            return None
-        if len([move for move in enemy_moves if move.i == 6 and move.j == j]) > 0:
-            return None
-        return Move(piece, 0, 0, False, Check.NONE, "", Castling.KING_SIDE)
-    return None
+    return Move(piece, 0, 0, False, Check.NONE, "", Castling.QUEEN_SIDE if rook.i == 1 else Castling.KING_SIDE)
 
 
 def get_moves_from_deltas(board_size: int, piece: Piece, pieces: Set[Piece], deltas: List[Tuple[int, int]]) \
